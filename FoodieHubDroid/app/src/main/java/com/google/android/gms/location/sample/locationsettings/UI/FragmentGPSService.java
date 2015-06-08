@@ -37,14 +37,14 @@ import java.util.List;
 /**
  * Created by JieJerryLin on 2015-05-31.
  */
-public class GPSService extends Fragment implements
+public class FragmentGPSService extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
         ResultCallback<LocationSettingsResult> {
 
     protected static final String TAG = "yolo";
-    public static final String NAME = GPSService.class.getSimpleName();
+    public static final String NAME = FragmentGPSService.class.getSimpleName();
 
     //Constant used in the location settings dialog.
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
@@ -290,8 +290,7 @@ public class GPSService extends Fragment implements
         mIsUpdated = true;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void handleLocationResponse(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_CHECK_SETTINGS:
@@ -324,7 +323,7 @@ public class GPSService extends Fragment implements
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient,
                 mLocationRequest,
-                GPSService.this
+                FragmentGPSService.this
         ).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(Status status) {
@@ -365,7 +364,7 @@ public class GPSService extends Fragment implements
         // recommended in applications that request frequent location updates.
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient,
-                GPSService.this
+                FragmentGPSService.this
         ).setResultCallback(new ResultCallback<Status>() {
             @Override
             public void onResult(Status status) {

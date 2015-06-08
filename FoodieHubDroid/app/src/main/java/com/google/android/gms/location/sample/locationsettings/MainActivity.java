@@ -6,7 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import com.google.android.gms.location.sample.locationsettings.UI.GPSService;
+import com.google.android.gms.location.sample.locationsettings.UI.FragmentGPSService;
 
 
 public class MainActivity extends Activity {
@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
             // if 'savedInstanceState' is null - this menas activity is created for the first time, ie. app just started
             getFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .add(R.id.rootView, new GPSService(), GPSService.NAME)
+                    .add(R.id.rootView, new FragmentGPSService(), FragmentGPSService.NAME)
                     .commit();
         }
     }
@@ -61,12 +61,13 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == REQUEST_CHECK_SETTINGS) {
-            Fragment gpsFragment = (Fragment) getFragmentManager()
-                    .findFragmentById(R.id.gps_wrapper);
-            gpsFragment.onActivityResult(requestCode, resultCode, data);
+            FragmentGPSService gpsFragment = (FragmentGPSService) getFragmentManager()
+                    .findFragmentByTag(FragmentGPSService.NAME);
+            gpsFragment.handleLocationResponse(requestCode, resultCode, data);
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
 }
