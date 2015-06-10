@@ -1,24 +1,47 @@
 package com.cs446.foddiehub.Adapter;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.database.DataSetObserver;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.cs446.foddiehub.R;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
-    private LayoutInflater mInflater;
+
+    private List<String> mPhotoUrls = new ArrayList<>();
+
     private View.OnClickListener mOnClickListener;
-    public ImageAdapter(Activity activity, View.OnClickListener onClickListener) {
-        mInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mOnClickListener = onClickListener;
+
+    public ImageAdapter() {
+        registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onInvalidated() {
+                super.onInvalidated();
+                notifyDataSetChanged();
+            }
+        });
+    }
+
+    public void clear(){
+        mPhotoUrls.clear();
     }
 
     public int getCount() {
@@ -33,11 +56,17 @@ public class ImageAdapter extends BaseAdapter {
         return position;
     }
 
+    public void add(String url){
+        mPhotoUrls.add(url);
+        notifyDataSetChanged();
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(
+            LayoutInflater inflater = LayoutInflater.from(convertView.getContext());
+            convertView = inflater.inflate(
                     R.layout.galleryitem, null);
             holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
             holder.checkbox = (CheckBox) convertView.findViewById(R.id.itemCheckBox);
@@ -46,16 +75,29 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.checkbox.setId(position);
-        holder.imageview.setId(position);
         holder.id = position;
+
+        holder.imageview.setAnimation(null);
+        UrlImageViewHelper.setUrlDrawable(holder.imageview, mPhotoUrls.get(position), R.drawable.loading, new UrlImageViewCallback() {
+            @Override
+            public void onLoaded(ImageView imageView, Bitmap loadedBitmap, String url, boolean loadedFromCache) {
+                if (!loadedFromCache) {
+                    ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, ScaleAnimation.RELATIVE_TO_SELF, .5f, ScaleAnimation.RELATIVE_TO_SELF, .5f);
+                    scale.setDuration(300);
+                    scale.setInterpolator(new OvershootInterpolator());
+                    imageView.startAnimation(scale);
+                }
+            }
+        });
         return convertView;
+    }
+
+    private static class ViewHolder {
+        ImageView imageview;
+        CheckBox checkbox;
+        int id;
     }
 }
 
-class ViewHolder {
-    ImageView imageview;
-    CheckBox checkbox;
-    int id;
-}
+
 
