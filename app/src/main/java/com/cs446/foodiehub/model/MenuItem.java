@@ -4,11 +4,13 @@ package com.cs446.foodiehub.model;
  * Created by Alex on 15-06-10.
  */
 public class MenuItem {
+    private String mId;
     private String mName;
     private String mDescription;
     private String mImage;
     private String mPrice;
     private String mCategory;
+    private String mServerId;
 
     private boolean checked;
 

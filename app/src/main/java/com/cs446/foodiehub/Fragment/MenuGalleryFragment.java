@@ -1,6 +1,5 @@
 package com.cs446.foodiehub.Fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,17 +14,6 @@ import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.MenuItem;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -50,11 +38,13 @@ public class MenuGalleryFragment extends Fragment {
         final Button submit = (Button) rootView.findViewById(R.id.btn_submit);
         final EditText tableNumber = (EditText) rootView.findViewById(R.id.et_table_number);
 
+
+        mImageAdapter = new ImageAdapter(getActivity(), mPhotoUrls);
         loadMenu();
         gridView = (GridView) rootView.findViewById(R.id.gv_menu_gallery);
 
 
-        mImageAdapter = new ImageAdapter(getActivity(), mPhotoUrls);
+
         gridView.setAdapter(mImageAdapter);
 
 //        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,84 +57,49 @@ public class MenuGalleryFragment extends Fragment {
 //            }
 //        });
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(
+                        getActivity().getApplicationContext(),"Submit clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return rootView;
     }
 
-    private View.OnClickListener mCheckmarkListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
-
     private void loadMenu() {
-
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    // clear existing results
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPhotoUrls.clear();
-                            mImageAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-                    // do a google image search, get the ~10 paginated results
-                    int start = 0;
-                    final ArrayList<String> urls = new ArrayList<String>();
-                    while (start < 40) {
-                        DefaultHttpClient client = new DefaultHttpClient();
-                        HttpGet get = new HttpGet(String.format("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s&start=%d&imgsz=medium", Uri.encode("Food"), start));
-                        HttpResponse resp = client.execute(get);
-                        HttpEntity entity = resp.getEntity();
-                        InputStream is = entity.getContent();
-                        final JSONObject json = new JSONObject(readToEnd(is));
-                        is.close();
-                        final JSONArray results = json.getJSONObject("responseData").getJSONArray("results");
-                        for (int i = 0; i < results.length(); i++) {
-                            JSONObject result = results.getJSONObject(i);
-                            urls.add(result.getString("url"));
-                        }
-
-                        start += results.length();
-                    }
-                    // add the results to the adapter
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (String url : urls) {
-                                mPhotoUrls.add(new MenuItem(url, Integer.toString((int)Math.random()*10+1)));
-                                mImageAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    });
-                } catch (final Exception ex) {
-                    // explodey error, lets toast it
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(MenuGalleryFragment.this.getActivity(), ex.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }
-        };
-        thread.start();
-    }
-
-    // turn a stream into a string
-    private static String readToEnd(InputStream input) throws IOException {
-        DataInputStream dis = new DataInputStream(input);
-        byte[] stuff = new byte[1024];
-        ByteArrayOutputStream buff = new ByteArrayOutputStream();
-        int read = 0;
-        while ((read = dis.read(stuff)) != -1) {
-            buff.write(stuff, 0, read);
+        for (int i = 0; i< imageURLArray.length; ++i){
+            mPhotoUrls.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
         }
-
-        return new String(buff.toByteArray());
+        mImageAdapter.notifyDataSetChanged();
     }
+
+    private String[] imageURLArray = new String[]{
+            "http://farm8.staticflickr.com/7315/9046944633_881f24c4fa_s.jpg",
+            "http://farm4.staticflickr.com/3777/9049174610_bf51be8a07_s.jpg",
+            "http://farm8.staticflickr.com/7324/9046946887_d96a28376c_s.jpg",
+            "http://farm3.staticflickr.com/2828/9046946983_923887b17d_s.jpg",
+            "http://farm4.staticflickr.com/3810/9046947167_3a51fffa0b_s.jpg",
+            "http://farm4.staticflickr.com/3773/9049175264_b0ea30fa75_s.jpg",
+            "http://farm4.staticflickr.com/3781/9046945893_f27db35c7e_s.jpg",
+            "http://farm6.staticflickr.com/5344/9049177018_4621cb63db_s.jpg",
+            "http://farm8.staticflickr.com/7307/9046947621_67e0394f7b_s.jpg",
+            "http://farm6.staticflickr.com/5457/9046948185_3be564ac10_s.jpg",
+            "http://farm4.staticflickr.com/3752/9046946459_a41fbfe614_s.jpg",
+            "http://farm8.staticflickr.com/7403/9046946715_85f13b91e5_s.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/6/64/Foods_(cropped).jpg",
+    "http://www.fitnea.com/wp-content/uploads/2013/04/11476450_s.jpg",
+    "http://www.pachd.com/free-images/food-images/oranges-01.jpg",
+            "http://www.pachd.com/free-images/food-images/pickles-01.jpg",
+            "http://www.pachd.com/free-images/food-images/apple-01.jpg",
+            "http://www.pachd.com/free-images/food-images/babanas-01.jpg",
+            "http://www.pachd.com/free-images/food-images/berries-01.jpg",
+            "http://www.pachd.com/free-images/food-images/berries-02.jpg",
+            "http://www.pachd.com/free-images/food-images/berries-03.jpg",
+            "http://www.pachd.com/free-images/food-images/blueberries-01.jpg",
+            "http://www.pachd.com/free-images/food-images/cherries-01.jpg",
+            "http://www.pachd.com/free-images/food-images/chinese-food-01.jpg",
+            "http://www.pachd.com/free-images/food-images/grilling-01.jpg"};
+
 }
