@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.MenuItem;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context context;
     private final ArrayList<MenuItem> mUrls;
-    private Picasso mPicasso;
+    private RequestManager mGlide;
 
     private static class ViewHolder {
         ImageView imageView;
@@ -29,7 +29,7 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context context, ArrayList<MenuItem> mUrls) {
         this.context = context;
         this.mUrls = mUrls;
-        mPicasso = Picasso.with(context);
+        mGlide = Glide.with(context);
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -38,8 +38,6 @@ public class ImageAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
             // get layout from panel_image.xml
             convertView = inflater.inflate(R.layout.panel_image, null);
 
@@ -53,6 +51,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         final MenuItem menuItem = mUrls.get(position);
+        viewHolder.checkBox.setChecked(menuItem.isChecked());
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,16 +68,7 @@ public class ImageAdapter extends BaseAdapter {
             }
         });
         String url = mUrls.get(position).getmImage();
-        mPicasso.cancelRequest(viewHolder.imageView);
-        mPicasso.load(url).into(viewHolder.imageView , new Callback() {
-            @Override public void onSuccess() {
-                //
-            }
-
-            @Override public void onError() {
-                // Dont do anything right now
-            }
-        });
+        mGlide.load(url).into(viewHolder.imageView);
 
         return convertView;
     }
@@ -97,7 +87,6 @@ public class ImageAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-
 
 }
 

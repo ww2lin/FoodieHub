@@ -14,6 +14,6 @@
     <dimen name="standard_gap_size">10dp</dimen>
     <dimen name="stand_large_gap_size">15dp</dimen>
 
-
+    <dimen name="menu_image_size">100dp</dimen>
 
 </resources>
