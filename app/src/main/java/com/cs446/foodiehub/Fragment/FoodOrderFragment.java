@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Fragment;
+package com.cs446.foodiehub.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.R;
 
 import java.util.Arrays;
 

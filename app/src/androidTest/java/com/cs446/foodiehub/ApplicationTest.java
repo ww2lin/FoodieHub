@@ -1,4 +1,4 @@
-package com.cs446.foddiehub;
+package com.cs446.foodiehub;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

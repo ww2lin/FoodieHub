@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Activity;
+package com.cs446.foodiehub.Activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -9,11 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
-import com.cs446.foddiehub.Factory.FragmentTypeFactory;
-import com.cs446.foddiehub.Fragment.FragmentType;
-import com.cs446.foddiehub.Fragment.RestaurantFragment;
-import com.cs446.foddiehub.Fragment.NavigationDrawerFragment;
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.Factory.FragmentTypeFactory;
+import com.cs446.foodiehub.Fragment.FragmentType;
+import com.cs446.foodiehub.Fragment.RestaurantFragment;
+import com.cs446.foodiehub.Fragment.NavigationDrawerFragment;
+import com.cs446.foodiehub.R;
 
 
 public class MainActivity extends ActionBarActivity

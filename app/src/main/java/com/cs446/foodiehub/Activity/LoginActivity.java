@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Activity;
+package com.cs446.foodiehub.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.R;
 
 /**
  * Created by Alex on 15-06-09.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cs446.foddiehub" >
+    package="com.cs446.foodiehub" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name="com.cs446.foodiehub.Activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".Activity.MainActivity"
+            android:name="com.cs446.foodiehub.Activity.MainActivity"
             android:label="@string/app_name" >
         </activity>
     </application>

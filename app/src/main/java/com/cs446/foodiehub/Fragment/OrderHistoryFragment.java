@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Fragment;
+package com.cs446.foodiehub.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.R;
 
 /**
  * Created by Alex on 15-06-09.
  */
-public class AboutMeFragment extends FoodieHubFragment {
+public class OrderHistoryFragment extends FoodieHubFragment {
 
     private ListView mListView;
 
-    public AboutMeFragment() {
+    public OrderHistoryFragment() {
     }
 
     @Override
@@ -26,7 +26,7 @@ public class AboutMeFragment extends FoodieHubFragment {
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AboutMeFragment.this.getActivity(), "you clicked on the fragment" + AboutMeFragment.this.getClass().getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderHistoryFragment.this.getActivity(), "you clicked on the fragment" + OrderHistoryFragment.this.getClass().getName(), Toast.LENGTH_SHORT).show();
             }
         });
         return rootView;

@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Fragment;
+package com.cs446.foodiehub.Fragment;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
@@ -21,8 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.cs446.foddiehub.Adapter.FragmentTypeAdapter;
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.Adapter.FragmentTypeAdapter;
+import com.cs446.foodiehub.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

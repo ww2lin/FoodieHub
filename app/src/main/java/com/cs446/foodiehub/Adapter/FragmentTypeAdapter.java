@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Adapter;
+package com.cs446.foodiehub.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.cs446.foddiehub.Fragment.FragmentType;
+import com.cs446.foodiehub.Fragment.FragmentType;
 
 /**
  * Created by Alex on 15-06-09.

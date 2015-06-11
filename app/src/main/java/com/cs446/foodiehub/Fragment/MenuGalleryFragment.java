@@ -1,4 +1,4 @@
-package com.cs446.foddiehub.Fragment;
+package com.cs446.foodiehub.Fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.Toast;
 
-import com.cs446.foddiehub.Adapter.ImageAdapter;
-import com.cs446.foddiehub.R;
+import com.cs446.foodiehub.Adapter.ImageAdapter;
+import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.model.MenuItem;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,7 +32,11 @@ import java.util.ArrayList;
  * Created by Alex on 15-06-10.
  */
 public class MenuGalleryFragment extends Fragment {
+
+    private GridView gridView;
+    private ArrayList<MenuItem> mPhotoUrls = new ArrayList<>();
     private ImageAdapter mImageAdapter;
+
     /**
      * Called when the activity is first created.
      */
@@ -45,22 +51,31 @@ public class MenuGalleryFragment extends Fragment {
         final EditText tableNumber = (EditText) rootView.findViewById(R.id.et_table_number);
 
         loadMenu();
+        gridView = (GridView) rootView.findViewById(R.id.gv_menu_gallery);
 
-        mImageAdapter = new ImageAdapter();
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Fragment mFragment = new FoodOrderFragment();
-//
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                //Replacing using the id of the container and not the fragment itself
-//                ft.replace(R.id.container, mFragment);
-//                ft.commit();
-            }
-        });
+        mImageAdapter = new ImageAdapter(getActivity(), mPhotoUrls);
+        gridView.setAdapter(mImageAdapter);
+
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View v,
+//                                    int position, long id) {
+//                Toast.makeText(
+//                        getActivity().getApplicationContext(),
+//                        ((TextView) v.findViewById(R.id.grid_item_label))
+//                                .getText(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         return rootView;
     }
+
+    private View.OnClickListener mCheckmarkListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     private void loadMenu() {
 
@@ -72,7 +87,8 @@ public class MenuGalleryFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mImageAdapter.clear();
+                            mPhotoUrls.clear();
+                            mImageAdapter.notifyDataSetChanged();
                         }
                     });
 
@@ -100,7 +116,8 @@ public class MenuGalleryFragment extends Fragment {
                         @Override
                         public void run() {
                             for (String url : urls) {
-                                mImageAdapter.add(url);
+                                mPhotoUrls.add(new MenuItem(url, Integer.toString((int)Math.random()*10+1)));
+                                mImageAdapter.notifyDataSetChanged();
                             }
                         }
                     });
@@ -124,8 +141,7 @@ public class MenuGalleryFragment extends Fragment {
         byte[] stuff = new byte[1024];
         ByteArrayOutputStream buff = new ByteArrayOutputStream();
         int read = 0;
-        while ((read = dis.read(stuff)) != -1)
-        {
+        while ((read = dis.read(stuff)) != -1) {
             buff.write(stuff, 0, read);
         }
 
