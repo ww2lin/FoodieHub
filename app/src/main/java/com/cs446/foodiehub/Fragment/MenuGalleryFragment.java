@@ -12,10 +12,10 @@ import android.widget.GridView;
 
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.model.FoodOrder;
 import com.cs446.foodiehub.model.MenuItem;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Created by Alex on 15-06-10.
@@ -26,13 +26,15 @@ public class MenuGalleryFragment extends Fragment {
     private ArrayList<MenuItem> mMenu = new ArrayList<>();
     private ImageAdapter mImageAdapter;
 
+    private static final String EXTRA_FOOD_ORDER = "extra_food_order";
+
     /**
      * Called when the activity is first created.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         final Button submit = (Button) rootView.findViewById(R.id.btn_submit);
@@ -50,17 +52,20 @@ public class MenuGalleryFragment extends Fragment {
                 // Since mMenu was passed by reference into the adapter
                 // thus we just fetch the "MenuItem.checked" field inside mMenu
                 // for all the photos;
-                LinkedList<MenuItem> selectedFood = new LinkedList<MenuItem>();
+                ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
                 for (MenuItem menuItem : mMenu){
                     if (menuItem.isChecked()){
-                        selectedFood.add(menuItem);
+                        selectedFood.add(new FoodOrder(menuItem.getServerId(), menuItem.getImage()));
                     }
                 }
 
                 // Open the checkout page
-                Fragment mFragment = new CheckOutFragment();
+                Fragment mFragment = new CheckoutFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(EXTRA_FOOD_ORDER, selectedFood);
+                // set Fragmentclass Arguments
+                mFragment.setArguments(bundle);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                //Replacing using the id of the container and not the fragment itself
                 ft.replace(R.id.container, mFragment);
                 ft.addToBackStack(null);
                 ft.commit();
@@ -75,6 +80,10 @@ public class MenuGalleryFragment extends Fragment {
             mMenu.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
         }
         mImageAdapter.notifyDataSetChanged();
+    }
+
+    public static ArrayList<FoodOrder> getFoodOrder(Bundle bundle){
+        return bundle.getParcelableArrayList(EXTRA_FOOD_ORDER);
     }
 
     private String[] imageURLArray = new String[]{

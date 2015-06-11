@@ -10,12 +10,15 @@
         android:layout_height="@dimen/menu_image_size">
     </ImageView>
 
-    <CheckBox
+    <!-- Use image view instead of checkbox, since the checkbox's onClickListener-->
+    <!-- gets called twice even though when the user has only clicked once.-->
+    <ImageView
         android:id="@+id/cb_food_selection"
-        android:layout_alignParentTop="true"
+        android:layout_width="@dimen/checkbox_size"
+        android:layout_height="@dimen/checkbox_size"
         android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/unchecked"/>
 
 
 </RelativeLayout>

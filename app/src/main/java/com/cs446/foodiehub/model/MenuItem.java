@@ -1,9 +1,12 @@
 package com.cs446.foodiehub.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Alex on 15-06-10.
  */
-public class MenuItem {
+public class MenuItem implements Parcelable {
     private String mId;
     private String mName;
     private String mDescription;
@@ -19,32 +22,34 @@ public class MenuItem {
         mPrice = price;
     }
 
-    public MenuItem(String mName, String mDescription, String mImage, String mPrice, String mCategory, boolean checked) {
+    public MenuItem(String mId, String mName, String mDescription, String mImage, String mPrice, String mCategory, String mServerId, boolean checked) {
+        this.mId = mId;
         this.mName = mName;
         this.mDescription = mDescription;
         this.mImage = mImage;
         this.mPrice = mPrice;
         this.mCategory = mCategory;
+        this.mServerId = mServerId;
         this.checked = checked;
     }
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
-    public String getmImage() {
+    public String getImage() {
         return mImage;
     }
 
-    public String getmPrice() {
+    public String getPrice() {
         return mPrice;
     }
 
-    public String getmCategory() {
+    public String getCategory() {
         return mCategory;
     }
 
@@ -55,4 +60,51 @@ public class MenuItem {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+    public String getServerId() {
+        return mServerId;
+    }
+
+    /**
+     * Parcelable interface
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected MenuItem(Parcel in) {
+        readFromParcel(in);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeString(mDescription);
+        dest.writeString(mImage);
+        dest.writeString(mPrice);
+        dest.writeString(mCategory);
+        dest.writeString(mServerId);
+    }
+
+    public void readFromParcel(Parcel in) {
+        mName = in.readString();
+        mDescription = in.readString();
+        mImage = in.readString();
+        mPrice = in.readString();
+        mCategory = in.readString();
+        mServerId = in.readString();
+    }
+
+    public static final Parcelable.Creator<MenuItem> CREATOR = new Creator<MenuItem>() {
+        public MenuItem createFromParcel(Parcel source) {
+            return new MenuItem(source);
+        }
+
+        public MenuItem[] newArray(int size) {
+            return new MenuItem[size];
+        }
+    };
+
+
 }
