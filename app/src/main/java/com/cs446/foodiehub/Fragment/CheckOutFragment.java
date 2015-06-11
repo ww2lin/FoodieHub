@@ -18,12 +18,12 @@ import java.util.Arrays;
 /**
  * Created by Alex on 15-06-09.
  */
-public class FoodOrderFragment extends FoodieHubFragment {
+public class CheckOutFragment extends FoodieHubFragment {
 
     private ListView mListView;
     private ArrayAdapter<String> mRestaurants;
 
-    public FoodOrderFragment() {
+    public CheckOutFragment() {
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FoodOrderFragment extends FoodieHubFragment {
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FoodOrderFragment.this.getActivity(), "you clicked on the fragment" + FoodOrderFragment.this.getClass().getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CheckOutFragment.this.getActivity(), "you clicked on the fragment" + CheckOutFragment.this.getClass().getName(), Toast.LENGTH_SHORT).show();
             }
         });
         return rootView;
