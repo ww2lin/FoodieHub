@@ -76,6 +76,12 @@ public class MenuGalleryFragment extends Fragment {
     }
 
     private void loadMenu() {
+        // TODO
+        // need to have a check here to see if the photo has been already added
+        // mMenu.clear will lose the selected food
+        // and if we remove mMenu.clear then photo will be duplicated when
+        // user clicks back on Checkout fragment
+        // Easy way is to check against the id
         mMenu.clear();
         for (int i = 0; i< imageURLArray.length; ++i){
             mMenu.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
