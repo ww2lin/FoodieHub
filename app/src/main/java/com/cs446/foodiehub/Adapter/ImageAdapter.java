@@ -1,16 +1,17 @@
 package com.cs446.foodiehub.Adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.MenuItem;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ImageAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         ImageView imageView;
-        CheckBox checkBox;
+        ImageView checkBox;
     }
 
     public ImageAdapter(Context context, ArrayList<MenuItem> mUrls) {
@@ -39,9 +40,9 @@ public class ImageAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // get layout from panel_image.xml
-            convertView = inflater.inflate(R.layout.panel_image, null);
+            convertView = inflater.inflate(R.layout.panel_gallery_image, null);
 
-            viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.cb_food_selection);
+            viewHolder.checkBox = (ImageView) convertView.findViewById(R.id.cb_food_selection);
 
             // set image
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_menu_image);
@@ -51,24 +52,25 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         final MenuItem menuItem = mUrls.get(position);
-        viewHolder.checkBox.setChecked(menuItem.isChecked());
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewHolder.checkBox.setChecked(!viewHolder.checkBox.isChecked());
-                menuItem.setChecked(viewHolder.checkBox.isChecked());
-            }
-        });
+
 
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewHolder.checkBox.setChecked(!viewHolder.checkBox.isChecked());
-                menuItem.setChecked(viewHolder.checkBox.isChecked());
+                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
             }
         });
-        String url = mUrls.get(position).getmImage();
+
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
+            }
+        });
+
+        String url = mUrls.get(position).getImage();
         mGlide.load(url).into(viewHolder.imageView);
+        updateCheckState(context, viewHolder.checkBox, menuItem);
 
         return convertView;
     }
@@ -85,8 +87,26 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
+
+    private void updateCheckState(Context context, ImageView checkbox, MenuItem menuItem){
+        checkbox.setImageDrawable(getCheckmarkDrawable(context, menuItem.isChecked()));
+    }
+
+    private void toggleCheckState(Context context, ImageView checkbox, MenuItem menuItem){
+        menuItem.setChecked(!menuItem.isChecked());
+        checkbox.setImageDrawable(getCheckmarkDrawable(context, menuItem.isChecked()));
+    }
+
+    private Drawable getCheckmarkDrawable(Context context, boolean state) {
+        if (state) {
+            return Util.getDrawable(context, R.drawable.checked);
+        } else return Util.getDrawable(context, R.drawable.unchecked);
+    }
+
+
+
 
 }
 

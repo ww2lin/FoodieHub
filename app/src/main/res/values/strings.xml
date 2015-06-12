@@ -1,21 +1,33 @@
 <resources>
-    <string name="app_name">FoddieHub</string>
+    <string name="app_name">FoodieHub</string>
 
+    <!--Fragments from the drawer-->
     <string name="restruants">Restruants</string>
     <string name="order_history">Order History</string>
     <string name="about_me">About Me</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_example">Example action</string>
-
-    <string name="action_settings">Settings</string>
-
+    <!--LoginActivity-->
     <string name="login_username">Username:</string>
     <string name="login_password">Password:</string>
     <string name="login">Login</string>
 
+    <!-- MenuGalleryFragment-->
     <string name="submit">Submit</string>
     <string name="table_number">Table Number</string>
+
+    <!-- CheckoutFragment-->
+    <string name="order">Order</string>
+
+    <!-- CheckoutFragment-->
+    <string name="food">Food</string>
+    <string name="notes">Notes</string>
+
+    <!-- hints -->
+    <string name="add_note">Add note!</string>
+
+    <!--defaults -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -9,11 +9,13 @@
 
     <dimen name="standard_textbox_width">100dp</dimen>
     <dimen name="standard_textbox_height">50dp</dimen>
+    <dimen name="standard_textsize">26sp</dimen>
 
     <dimen name="standard_small_gap_size">5dp</dimen>
     <dimen name="standard_gap_size">10dp</dimen>
-    <dimen name="stand_large_gap_size">15dp</dimen>
+    <dimen name="standard_large_gap_size">15dp</dimen>
 
     <dimen name="menu_image_size">100dp</dimen>
 
+    <dimen name="checkbox_size">40dp</dimen>
 </resources>

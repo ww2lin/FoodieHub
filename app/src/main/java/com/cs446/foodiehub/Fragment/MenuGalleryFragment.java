@@ -2,16 +2,17 @@ package com.cs446.foodiehub.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.model.FoodOrder;
 import com.cs446.foodiehub.model.MenuItem;
 
 import java.util.ArrayList;
@@ -22,8 +23,10 @@ import java.util.ArrayList;
 public class MenuGalleryFragment extends Fragment {
 
     private GridView gridView;
-    private ArrayList<MenuItem> mPhotoUrls = new ArrayList<>();
+    private ArrayList<MenuItem> mMenu = new ArrayList<>();
     private ImageAdapter mImageAdapter;
+
+    private static final String EXTRA_FOOD_ORDER = "extra_food_order";
 
     /**
      * Called when the activity is first created.
@@ -31,37 +34,41 @@ public class MenuGalleryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
-
 
         final Button submit = (Button) rootView.findViewById(R.id.btn_submit);
         final EditText tableNumber = (EditText) rootView.findViewById(R.id.et_table_number);
 
-
-        mImageAdapter = new ImageAdapter(getActivity(), mPhotoUrls);
+        mImageAdapter = new ImageAdapter(getActivity(), mMenu);
         loadMenu();
         gridView = (GridView) rootView.findViewById(R.id.gv_menu_gallery);
-
-
-
         gridView.setAdapter(mImageAdapter);
 
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(
-//                        getActivity().getApplicationContext(),
-//                        ((TextView) v.findViewById(R.id.grid_item_label))
-//                                .getText(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(
-                        getActivity().getApplicationContext(),"Submit clicked", Toast.LENGTH_SHORT).show();
+                // Since mMenu was passed by reference into the adapter
+                // thus we just fetch the "MenuItem.checked" field inside mMenu
+                // for all the photos;
+                ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
+                for (MenuItem menuItem : mMenu){
+                    if (menuItem.isChecked()){
+                        selectedFood.add(new FoodOrder(menuItem.getServerId(), menuItem.getImage()));
+                    }
+                }
+
+                // Open the checkout page
+                Fragment mFragment = new CheckoutFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(EXTRA_FOOD_ORDER, selectedFood);
+                // set Fragmentclass Arguments
+                mFragment.setArguments(bundle);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.container, mFragment);
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
 
@@ -70,9 +77,13 @@ public class MenuGalleryFragment extends Fragment {
 
     private void loadMenu() {
         for (int i = 0; i< imageURLArray.length; ++i){
-            mPhotoUrls.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
+            mMenu.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
         }
         mImageAdapter.notifyDataSetChanged();
+    }
+
+    public static ArrayList<FoodOrder> getFoodOrder(Bundle bundle){
+        return bundle.getParcelableArrayList(EXTRA_FOOD_ORDER);
     }
 
     private String[] imageURLArray = new String[]{

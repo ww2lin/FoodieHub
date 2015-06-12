@@ -29,6 +29,7 @@ public class RestaurantFragment extends FoodieHubFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_restaurant, container, false);
 
         mListView = (ListView) rootView.findViewById(R.id.lv_restaurants);
