@@ -76,6 +76,7 @@ public class MenuGalleryFragment extends Fragment {
     }
 
     private void loadMenu() {
+        mMenu.clear();
         for (int i = 0; i< imageURLArray.length; ++i){
             mMenu.add(new MenuItem(imageURLArray[i], Integer.toString(i)));
         }
