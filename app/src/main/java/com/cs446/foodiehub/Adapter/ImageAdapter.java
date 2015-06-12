@@ -57,19 +57,20 @@ public class ImageAdapter extends BaseAdapter {
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateCheckState(v.getContext(), viewHolder, menuItem);
+                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
             }
         });
 
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateCheckState(v.getContext(), viewHolder, menuItem);
+                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
             }
         });
 
         String url = mUrls.get(position).getImage();
         mGlide.load(url).into(viewHolder.imageView);
+        updateCheckState(context, viewHolder.checkBox, menuItem);
 
         return convertView;
     }
@@ -89,9 +90,13 @@ public class ImageAdapter extends BaseAdapter {
         return position;
     }
 
-    private void updateCheckState(Context context, ViewHolder viewHolder, MenuItem menuItem){
+    private void updateCheckState(Context context, ImageView checkbox, MenuItem menuItem){
+        checkbox.setImageDrawable(getCheckmarkDrawable(context, menuItem.isChecked()));
+    }
+
+    private void toggleCheckState(Context context, ImageView checkbox, MenuItem menuItem){
         menuItem.setChecked(!menuItem.isChecked());
-        viewHolder.checkBox.setImageDrawable(getCheckmarkDrawable(context, menuItem.isChecked()));
+        checkbox.setImageDrawable(getCheckmarkDrawable(context, menuItem.isChecked()));
     }
 
     private Drawable getCheckmarkDrawable(Context context, boolean state) {

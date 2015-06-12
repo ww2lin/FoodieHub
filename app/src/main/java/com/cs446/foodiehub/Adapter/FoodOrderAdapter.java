@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 15-06-11.
  */
-public class CheckoutAdapter extends BaseAdapter {
+public class FoodOrderAdapter extends BaseAdapter {
     private Context context;
     private final ArrayList<FoodOrder> mFoodOrders;
     private RequestManager mGlide;
@@ -28,10 +28,10 @@ public class CheckoutAdapter extends BaseAdapter {
         EditText editText;
     }
 
-    public CheckoutAdapter(Context context, ArrayList<FoodOrder> foodOrders) {
+    public FoodOrderAdapter(Context context, ArrayList<FoodOrder> foodOrders) {
         this.context = context;
         this.mFoodOrders = foodOrders;
-        mGlide = Glide.with(context);
+        this.mGlide = Glide.with(context);
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -41,7 +41,7 @@ public class CheckoutAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // get layout from panel_image.xml
-            convertView = inflater.inflate(R.layout.panel_gallery_image, null);
+            convertView = inflater.inflate(R.layout.panel_checkout_order, null);
 
             viewHolder.editText = (EditText) convertView.findViewById(R.id.et_note);
 
@@ -54,9 +54,6 @@ public class CheckoutAdapter extends BaseAdapter {
 
         String url = mFoodOrders.get(position).getUrl();
         mGlide.load(url).into(viewHolder.imageView);
-
-
-
         return convertView;
     }
 

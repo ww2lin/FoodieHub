@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.cs446.foodiehub.Adapter.FoodOrderAdapter;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.FoodOrder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Alex on 15-06-09.
@@ -19,7 +18,7 @@ import java.util.List;
 public class CheckoutFragment extends FoodieHubFragment {
 
     private ArrayList<FoodOrder> mFoodOrders;
-    private ArrayAdapter<String> mOrders;
+    private FoodOrderAdapter mFoodOrderAdapter;
     private ListView mListView;
 
     @Override
@@ -31,16 +30,9 @@ public class CheckoutFragment extends FoodieHubFragment {
 
         mListView = (ListView) rootView.findViewById(R.id.lv_orders);
 
+        mFoodOrderAdapter = new FoodOrderAdapter(getActivity(), mFoodOrders);
 
-        List<String> temp = new ArrayList<>();
-        for (FoodOrder foodOrder : mFoodOrders){
-            temp.add(foodOrder.getUrl());
-        }
-
-        mOrders = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, temp);
-
-        mListView.setAdapter(mOrders);
+        mListView.setAdapter(mFoodOrderAdapter);
 
         return rootView;
     }
