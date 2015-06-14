@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -25,6 +26,7 @@ public class ImageAdapter extends BaseAdapter {
     private static class ViewHolder {
         ImageView imageView;
         ImageView checkBox;
+        TextView price;
     }
 
     public ImageAdapter(Context context, ArrayList<MenuItem> mUrls) {
@@ -46,6 +48,10 @@ public class ImageAdapter extends BaseAdapter {
 
             // set image
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_menu_image);
+            convertView.setTag(viewHolder);
+
+            //set price
+            viewHolder.price = (TextView) convertView.findViewById(R.id.tv_price);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -71,6 +77,7 @@ public class ImageAdapter extends BaseAdapter {
         String url = mUrls.get(position).getImage();
         mGlide.load(url).into(viewHolder.imageView);
         updateCheckState(context, viewHolder.checkBox, menuItem);
+        viewHolder.price.setText(mUrls.get(position).getPrice());
 
         return convertView;
     }

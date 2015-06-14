@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/rect_background"
     android:padding="5dp" >
 
     <ImageView
@@ -9,6 +10,13 @@
         android:layout_width="@dimen/menu_image_size"
         android:layout_height="@dimen/menu_image_size">
     </ImageView>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_below="@id/iv_menu_image"
+        android:gravity="center"
+        android:layout_width="@dimen/menu_image_size"
+        android:layout_height="wrap_content" />
 
     <!-- Use image view instead of checkbox, since the checkbox's onClickListener-->
     <!-- gets called twice even though when the user has only clicked once.-->
