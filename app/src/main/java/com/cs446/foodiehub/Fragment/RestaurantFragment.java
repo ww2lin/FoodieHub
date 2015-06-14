@@ -7,13 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.cs446.foodiehub.Adapter.RestaurantAdapter;
+import com.cs446.foodiehub.Api.RestaurantRequest;
+import com.cs446.foodiehub.Interface.SeverResponse;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.Util.Util;
+import com.cs446.foodiehub.model.Restaurant;
+import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Created by Alex on 15-06-09.
@@ -21,7 +26,10 @@ import java.util.Arrays;
 public class RestaurantFragment extends FoodieHubFragment {
 
     private ListView mListView;
-    private ArrayAdapter<String> mRestaurants;
+    private RestaurantAdapter mRestaurants;
+    private String mSelectedRestaurantId;
+
+    private static final String EXTRA_SELECTED_RESTAURANT = "extra_selected_restaurant";
 
     public RestaurantFragment() {
     }
@@ -32,13 +40,11 @@ public class RestaurantFragment extends FoodieHubFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_restaurant, container, false);
 
+        // Fetch the list of restaurants
+        RestaurantRequest.getRestaurants(mServerResponse);
+
         mListView = (ListView) rootView.findViewById(R.id.lv_restaurants);
 
-        String[] values = new String[] {"slc", "mc", "dc"};
-        mRestaurants = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, Arrays.asList(values));
-
-        mListView.setAdapter(mRestaurants);
         mListView.setOnItemClickListener(onItemClickListener);
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +60,39 @@ public class RestaurantFragment extends FoodieHubFragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Fragment mFragment = new MenuGalleryFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(EXTRA_SELECTED_RESTAURANT, mRestaurants.getItem(position).getRestaurantId());
+            // set Fragmentclass Arguments
+            mFragment.setArguments(bundle);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            //Replacing using the id of the container and not the fragment itself
+
             ft.replace(R.id.container, mFragment);
             ft.addToBackStack(null);
             ft.commit();
         }
     };
 
+    public static String getMenu(Bundle bundle) {
+        return bundle.getString(EXTRA_SELECTED_RESTAURANT);
+    }
 
+    private SeverResponse mServerResponse = new SeverResponse() {
+        @Override
+        public void onSuccess(int statusCode, String responseString) {
+            try {
+                ArrayList<Restaurant> restaurants = Util.getMapper().readValue(responseString, new TypeReference<ArrayList<Restaurant>>() {
+                });
+                mRestaurants = new RestaurantAdapter(getActivity(), restaurants);
+                mListView.setAdapter(mRestaurants);
+//                    mRestaurants.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onFailure(int statusCode, String responseString) {
+            Toast.makeText(RestaurantFragment.this.getActivity(), "Something unexpected happend!", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

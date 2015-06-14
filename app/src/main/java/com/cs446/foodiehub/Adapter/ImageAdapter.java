@@ -105,7 +105,9 @@ public class ImageAdapter extends BaseAdapter {
         } else return Util.getDrawable(context, R.drawable.unchecked);
     }
 
-
+    public ArrayList<MenuItem> getMenu(){
+        return mUrls;
+    }
 
 
 }

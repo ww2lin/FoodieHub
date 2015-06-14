@@ -3,19 +3,29 @@ package com.cs446.foodiehub.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Alex on 15-06-10.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuItem implements Parcelable {
     private String mId;
+    @JsonProperty("name")
     private String mName;
     private String mDescription;
+    @JsonProperty("picture")
     private String mImage;
+    @JsonProperty("price")
     private String mPrice;
     private String mCategory;
     private String mServerId;
 
     private boolean checked;
+
+    public MenuItem() {
+    }
 
     public MenuItem(String image, String price){
         mImage = image;

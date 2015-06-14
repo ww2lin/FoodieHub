@@ -7,8 +7,8 @@
     <string name="about_me">About Me</string>
 
     <!--LoginActivity-->
-    <string name="login_username">Username:</string>
-    <string name="login_password">Password:</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
     <string name="login">Login</string>
 
     <!-- MenuGalleryFragment-->

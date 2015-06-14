@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.R;
 
 /**
@@ -15,8 +15,8 @@ import com.cs446.foodiehub.R;
 public class LoginActivity extends Activity{
 
     private Button btnLogin;
-    private EditText etUserName;
-    private EditText etPassword;
+    private BootstrapEditText etUserName;
+    private BootstrapEditText etPassword;
 
     private static final String EXTRA_USERNAME="extra_username";
     private static final String EXTRA_PASSWORD="extra_password";
@@ -27,9 +27,8 @@ public class LoginActivity extends Activity{
         setContentView(R.layout.activity_login);
 
         btnLogin = (Button) findViewById(R.id.btn_login);
-        etUserName = (EditText) findViewById(R.id.et_username);
-        etPassword = (EditText) findViewById(R.id.et_password);
-
+        etUserName = (BootstrapEditText) findViewById(R.id.et_username);
+        etPassword = (BootstrapEditText) findViewById(R.id.et_password);
         setupEventListener();
     }
 
