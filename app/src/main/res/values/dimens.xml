@@ -9,7 +9,8 @@
 
     <dimen name="standard_textbox_width">300dp</dimen>
     <dimen name="standard_textbox_height">40dp</dimen>
-    <dimen name="standard_textsize">26sp</dimen>
+    <dimen name="large_textsize">26sp</dimen>
+    <dimen name="standard_textsize">13sp</dimen>
 
     <dimen name="standard_small_gap_size">5dp</dimen>
     <dimen name="standard_gap_size">10dp</dimen>

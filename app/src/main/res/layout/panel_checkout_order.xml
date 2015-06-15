@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_margin="@dimen/standard_large_gap_size">
 
     <ImageView
         android:id="@+id/iv_menu_image"
         android:layout_width="@dimen/menu_image_size"
-        android:layout_height="@dimen/menu_image_size" />
+        android:layout_height="@dimen/menu_image_size"
+        android:layout_marginStart="@dimen/standard_large_gap_size"
+        android:layout_marginEnd="@dimen/standard_large_gap_size" />
 
-    <EditText
-        android:id="@+id/et_note"
+    <Button
+        android:id="@+id/btn_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/add_note"
-        android:ellipsize="end"
-        android:maxLines="3" />
+        android:layout_margin="@dimen/standard_large_gap_size"
+        android:layout_toEndOf="@id/iv_menu_image"
+        android:text="@string/add_note" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/standard_large_gap_size"
+        android:layout_toEndOf="@id/btn_note"
+        android:gravity="end" />
+
+</RelativeLayout>

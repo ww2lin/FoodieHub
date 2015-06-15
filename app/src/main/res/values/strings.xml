@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FoodieHub</string>
-
+    <string name="submit">Submit</string>
     <!--Fragments from the drawer-->
-    <string name="restruants">Restruants</string>
+    <string name="restruants">Restaurants</string>
     <string name="order_history">Order History</string>
     <string name="about_me">About Me</string>
 
@@ -12,18 +12,17 @@
     <string name="login">Login</string>
 
     <!-- MenuGalleryFragment-->
-    <string name="submit">Submit</string>
-    <string name="table_number">Table Number</string>
 
-    <!-- CheckoutFragment-->
-    <string name="order">Order</string>
+    <string name="table_number">Table Number</string>
 
     <!-- CheckoutFragment-->
     <string name="food">Food</string>
     <string name="notes">Notes</string>
+    <string name="total">Total</string>
 
     <!-- hints -->
-    <string name="add_note">Add note!</string>
+    <string name="add_note">add note</string>
+    <string name="click_add_note">Click here to add notes!</string>
 
     <!--defaults -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

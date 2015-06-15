@@ -5,13 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.FoodOrder;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,8 @@ public class FoodOrderAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         ImageView imageView;
-        EditText editText;
+        Button button;
+        TextView price;
     }
 
     public FoodOrderAdapter(Context context, ArrayList<FoodOrder> foodOrders) {
@@ -43,17 +47,27 @@ public class FoodOrderAdapter extends BaseAdapter {
             // get layout from panel_image.xml
             convertView = inflater.inflate(R.layout.panel_checkout_order, null);
 
-            viewHolder.editText = (EditText) convertView.findViewById(R.id.et_note);
+            viewHolder.button = (Button) convertView.findViewById(R.id.btn_note);
 
             // set image
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_menu_image);
+
+            // set up the price column
+            viewHolder.price = (TextView) convertView.findViewById(R.id.tv_price);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        String url = mFoodOrders.get(position).getUrl();
-        mGlide.load(url).into(viewHolder.imageView);
+        FoodOrder foodOrder = mFoodOrders.get(position);
+        mGlide.load(foodOrder.getUrl()).into(viewHolder.imageView);
+        viewHolder.price.setText(foodOrder.getPrice());
+        viewHolder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNote();
+            }
+        });
         return convertView;
     }
 
@@ -70,5 +84,18 @@ public class FoodOrderAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    private void addNote(){
+        DialogPlus dialog = new DialogPlus.Builder(context)
+                .setAdapter(this)
+                .setGravity(DialogPlus.Gravity.CENTER)
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
+                    }
+                })
+                .create();
+        dialog.show();
     }
 }

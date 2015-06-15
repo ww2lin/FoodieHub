@@ -10,10 +10,12 @@ public class FoodOrder implements Parcelable {
     private String mServerId;
     private String mUrl;
     private String mNote;
+    private String mPrice;
 
-    public FoodOrder(String mServerId, String mUrl) {
+    public FoodOrder(String mServerId, String mUrl, String mPrice) {
         this.mServerId = mServerId;
         this.mUrl = mUrl;
+        this.mPrice = mPrice;
     }
 
     public String getServerId() {
@@ -30,6 +32,10 @@ public class FoodOrder implements Parcelable {
 
     public void setNote(String mNote) {
         this.mNote = mNote;
+    }
+
+    public String getPrice() {
+        return mPrice;
     }
 
     /**
@@ -49,12 +55,14 @@ public class FoodOrder implements Parcelable {
         dest.writeString(mServerId);
         dest.writeString(mUrl);
         dest.writeString(mNote);
+        dest.writeString(mPrice);
     }
 
     public void readFromParcel(Parcel in) {
         mServerId = in.readString();
         mUrl = in.readString();
         mNote = in.readString();
+        mPrice = in.readString();
     }
 
     public static final Parcelable.Creator<FoodOrder> CREATOR = new Parcelable.Creator<FoodOrder>() {

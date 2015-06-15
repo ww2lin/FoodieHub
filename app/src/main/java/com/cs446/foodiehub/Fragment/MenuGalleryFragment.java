@@ -33,8 +33,10 @@ public class MenuGalleryFragment extends Fragment {
 //    private ArrayList<MenuItem> mMenu;
     private ImageAdapter mImageAdapter;
     private String mSelectedRestaurantId;
+    private double mTotalPrice = 0;
 
     private static final String EXTRA_FOOD_ORDER = "extra_food_order";
+    private static final String EXTRA_TOTAL_PRICE = "extra_total_price";
 
     /**
      * Called when the activity is first created.
@@ -43,6 +45,7 @@ public class MenuGalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        mTotalPrice = 0;
         View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         final Button submit = (Button) rootView.findViewById(R.id.btn_submit);
@@ -53,8 +56,6 @@ public class MenuGalleryFragment extends Fragment {
         loadMenu();
         gridView = (GridView) rootView.findViewById(R.id.gv_menu_gallery);
 
-
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +65,8 @@ public class MenuGalleryFragment extends Fragment {
                 ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
                 for (MenuItem menuItem : mImageAdapter.getMenu()) {
                     if (menuItem.isChecked()) {
-                        selectedFood.add(new FoodOrder(menuItem.getServerId(), menuItem.getImage()));
+                        selectedFood.add(new FoodOrder(menuItem.getServerId(), menuItem.getImage(), menuItem.getPrice()));
+                        mTotalPrice+=Double.parseDouble(menuItem.getPrice());
                     }
                 }
 //                HttpClient.ExecuteGetRequest("http://www.mocky.io/v2/5185415ba171ea3a00704eed", severResponse);
@@ -72,6 +74,7 @@ public class MenuGalleryFragment extends Fragment {
                 Fragment mFragment = new CheckoutFragment();
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList(EXTRA_FOOD_ORDER, selectedFood);
+                bundle.putDouble(EXTRA_TOTAL_PRICE, mTotalPrice);
                 // set Fragmentclass Arguments
                 mFragment.setArguments(bundle);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -105,6 +108,9 @@ public class MenuGalleryFragment extends Fragment {
         return bundle.getParcelableArrayList(EXTRA_FOOD_ORDER);
     }
 
+    public static Double getTotalPrice(Bundle bundle){
+        return bundle.getDouble(EXTRA_TOTAL_PRICE);
+    }
 
     public SeverResponse mSeverResponse = new SeverResponse() {
         @Override

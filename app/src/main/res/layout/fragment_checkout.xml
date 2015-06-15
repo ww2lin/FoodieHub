@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:textSize="@dimen/standard_textsize"
+            android:textSize="@dimen/large_textsize"
             android:text="@string/food" />
 
         <TextView
@@ -23,8 +23,29 @@
             android:layout_centerHorizontal="true"
             android:paddingStart="@dimen/menu_image_size"
             android:paddingEnd="@dimen/menu_image_size"
-            android:textSize="@dimen/standard_textsize"
+            android:textSize="@dimen/large_textsize"
             android:text="@string/notes" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/standard_textsize"
+                android:text="@string/total" />
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/standard_textsize"
+                android:text="@string/total"/>
+
+            </LinearLayout>
     </RelativeLayout>
 
     <ListView

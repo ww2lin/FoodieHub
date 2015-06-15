@@ -48,7 +48,6 @@ public class ImageAdapter extends BaseAdapter {
 
             // set image
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_menu_image);
-            convertView.setTag(viewHolder);
 
             //set price
             viewHolder.price = (TextView) convertView.findViewById(R.id.tv_price);
