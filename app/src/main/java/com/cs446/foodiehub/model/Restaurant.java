@@ -15,13 +15,9 @@ public class Restaurant extends BaseModel{
     @JsonProperty("address")
     String address;
 
-    public Restaurant() {}
+    String img;
 
-    public Restaurant(String id, String name, String restaurantId, String address) {
-        super(id, name);
-        this.restaurantId = restaurantId;
-        this.address = address;
-    }
+    public Restaurant() {}
 
     public String getRestaurantId() {
         return restaurantId;
@@ -37,5 +33,13 @@ public class Restaurant extends BaseModel{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

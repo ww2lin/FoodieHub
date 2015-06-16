@@ -5,5 +5,6 @@
     <color name="main_color">#6effc86d</color>
     <color name="navigation_item_color">#ff3e3f4d</color>
     <color name="image_border">#ffffd18b</color>
+    <color name="progress_bar">#ffffe100</color>
 
 </resources>

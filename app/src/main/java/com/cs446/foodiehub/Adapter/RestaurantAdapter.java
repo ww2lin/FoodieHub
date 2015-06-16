@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cs446.foodiehub.model.MenuItem;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.Restaurant;
 
 import java.util.ArrayList;
@@ -18,14 +21,17 @@ import java.util.ArrayList;
 public class RestaurantAdapter extends BaseAdapter{
     private Context context;
     private final ArrayList<Restaurant> mRestaurants;
+    private RequestManager mGlide;
 
     private static class ViewHolder {
-        TextView textView;
+        TextView restaurantName;
+        ImageView restaurantImage;
     }
 
     public RestaurantAdapter(Context context, ArrayList<Restaurant> foodOrders) {
         this.context = context;
         this.mRestaurants = foodOrders;
+        mGlide = Glide.with(context);
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -35,14 +41,17 @@ public class RestaurantAdapter extends BaseAdapter{
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             // get layout from panel_image.xml
-            convertView = inflater.inflate(android.R.layout.simple_list_item_1, null);
+            convertView = inflater.inflate(R.layout.panel_restaurants, null);
 
-            viewHolder.textView = (TextView) convertView.findViewById(android.R.id.text1);
+            viewHolder.restaurantName = (TextView) convertView.findViewById(R.id.tv_name);
+            viewHolder.restaurantImage = (ImageView) convertView.findViewById(R.id.iv_restaurant);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.textView.setText(mRestaurants.get(position).getName());
+        Restaurant restaurant = mRestaurants.get(position);
+        viewHolder.restaurantName.setText(restaurant.getName());
+        mGlide.load(restaurant.getImg()).centerCrop().into(viewHolder.restaurantImage);
         return convertView;
     }
 

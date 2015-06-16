@@ -61,5 +61,10 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
 
+    // progre bar
+    // https://github.com/pnikosis/materialish-progress
+    compile 'com.pnikosis:materialish-progress:1.5'
 
+    // TextView
+    compile 'com.github.johnkil.android-robototextview:robototextview:2.4.0'
 }
