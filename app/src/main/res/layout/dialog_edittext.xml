@@ -12,8 +12,6 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/standard_large_gap_size"
         android:hint="@string/click_add_note"
-        android:maxLength="@integer/standard_text_size"
-        android:singleLine="true"
         bootstrap:be_roundedCorners="true"
         bootstrap:be_state="success" />
 
