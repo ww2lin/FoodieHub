@@ -66,5 +66,6 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.5'
 
     // TextView
+    // https://github.com/johnkil/Android-RobotoTextView
     compile 'com.github.johnkil.android-robototextview:robototextview:2.4.0'
 }

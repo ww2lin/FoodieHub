@@ -76,9 +76,6 @@ public class RestaurantFragment extends FoodieHubFragment {
             try {
                 ArrayList<Restaurant> restaurants = Util.getMapper().readValue(responseString, new TypeReference<ArrayList<Restaurant>>() {
                 });
-                restaurants.get(0).setImg("http://www.pachd.com/free-images/food-images/berries-01.jpg");
-                restaurants.get(1).setImg("http://www.pachd.com/free-images/food-images/berries-02.jpg");
-
                 mRestaurants = new RestaurantAdapter(getActivity(), restaurants);
                 mListView.setAdapter(mRestaurants);
 //                    mRestaurants.notifyDataSetChanged();

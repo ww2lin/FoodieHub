@@ -44,7 +44,9 @@ public class LoginActivity extends Activity{
             @Override
             public void onClick(View v) {
                 progressWheel.setVisibility(View.VISIBLE);
+                btnLogin.setVisibility(View.GONE);
                 progressWheel.spin();
+
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -57,6 +59,12 @@ public class LoginActivity extends Activity{
 
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        btnLogin.setVisibility(View.VISIBLE);
     }
 
     @Override

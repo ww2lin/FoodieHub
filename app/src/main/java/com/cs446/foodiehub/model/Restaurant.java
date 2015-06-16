@@ -15,6 +15,7 @@ public class Restaurant extends BaseModel{
     @JsonProperty("address")
     String address;
 
+    @JsonProperty("imageurl")
     String img;
 
     public Restaurant() {}

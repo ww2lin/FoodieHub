@@ -29,7 +29,9 @@
 
     <dimen name="menu_image_size">100dp</dimen>
 
-    <dimen name="restaurant_image_height">200dp</dimen>
+    <dimen name="restaurant_image_height">150dp</dimen>
+
+    <dimen name="icon_size">25dp</dimen>
 
     <dimen name="item_size">18sp</dimen>
 

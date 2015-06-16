@@ -17,13 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cs446.foodiehub.Activity.FoodieHubActivity;
-import com.cs446.foodiehub.Adapter.FragmentTypeAdapter;
+import com.cs446.foodiehub.Adapter.NavigationAdapter;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.model.NavigationItem;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -55,7 +55,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
-    private FragmentTypeAdapter mFragmentTypeAdapter;
+    private NavigationAdapter mNavigationAdapter;
     private View mFragmentContainerView;
 
     private int mCurrentSelectedPosition = 0;
@@ -101,13 +101,13 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mFragmentTypeAdapter = new FragmentTypeAdapter(
+        mNavigationAdapter = new NavigationAdapter(
                 getActionBar().getThemedContext(),
-                new FragmentType[]{FragmentType.RESTAURANT,
-                        FragmentType.ORDER_HISTORY,
-                        FragmentType.ABOUT_ME
+                new NavigationItem[]{ new NavigationItem(FragmentType.RESTAURANT, R.drawable.restaurant),
+                        new NavigationItem(FragmentType.ORDER_HISTORY, R.drawable.list),
+                        new NavigationItem(FragmentType.ABOUT_ME, R.drawable.profile)
                 });
-        mDrawerListView.setAdapter(mFragmentTypeAdapter);
+        mDrawerListView.setAdapter(mNavigationAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -199,7 +199,7 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position, mFragmentTypeAdapter == null ? FragmentType.RESTAURANT : mFragmentTypeAdapter.getItem(position));
+            mCallbacks.onNavigationDrawerItemSelected(position, mNavigationAdapter == null ? FragmentType.RESTAURANT : mNavigationAdapter.getItem(position).getFragmentType());
         }
     }
 
