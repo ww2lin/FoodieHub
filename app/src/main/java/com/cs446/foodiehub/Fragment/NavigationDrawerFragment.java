@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -102,8 +103,6 @@ public class NavigationDrawerFragment extends Fragment {
         });
         mFragmentTypeAdapter = new FragmentTypeAdapter(
                 getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
                 new FragmentType[]{FragmentType.RESTAURANT,
                         FragmentType.ORDER_HISTORY,
                         FragmentType.ABOUT_ME

@@ -13,7 +13,7 @@ android {
     buildToolsVersion "23.0.0 rc2"
 
     defaultConfig {
-        applicationId "com.cs446.foddiehub"
+        applicationId "com.cs446.foodiehub"
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 1

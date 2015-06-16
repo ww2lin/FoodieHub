@@ -19,5 +19,7 @@
 
     <dimen name="menu_image_size">100dp</dimen>
 
+    <dimen name="item_size">18sp</dimen>
+
     <dimen name="checkbox_size">40dp</dimen>
 </resources>
