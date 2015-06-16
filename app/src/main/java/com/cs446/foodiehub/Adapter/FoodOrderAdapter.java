@@ -2,19 +2,21 @@ package com.cs446.foodiehub.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.Util.Util;
+import com.cs446.foodiehub.dialog.AddNoteDialog;
 import com.cs446.foodiehub.model.FoodOrder;
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,7 @@ public class FoodOrderAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         ImageView imageView;
-        Button button;
+        BootstrapEditText addNote;
         TextView price;
     }
 
@@ -47,7 +49,7 @@ public class FoodOrderAdapter extends BaseAdapter {
             // get layout from panel_image.xml
             convertView = inflater.inflate(R.layout.panel_checkout_order, null);
 
-            viewHolder.button = (Button) convertView.findViewById(R.id.btn_note);
+            viewHolder.addNote = (BootstrapEditText) convertView.findViewById(R.id.et_note);
 
             // set image
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.iv_menu_image);
@@ -59,13 +61,16 @@ public class FoodOrderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        FoodOrder foodOrder = mFoodOrders.get(position);
-        mGlide.load(foodOrder.getUrl()).into(viewHolder.imageView);
+        final FoodOrder foodOrder = mFoodOrders.get(position);
+        mGlide.load(foodOrder.getUrl()).centerCrop().into(viewHolder.imageView);
         viewHolder.price.setText(foodOrder.getPrice());
-        viewHolder.button.setOnClickListener(new View.OnClickListener() {
+        viewHolder.addNote.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                addNote();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_UP) {
+                    addNote(foodOrder, viewHolder.addNote);
+                }
+                return true;
             }
         });
         return convertView;
@@ -86,16 +91,31 @@ public class FoodOrderAdapter extends BaseAdapter {
         return position;
     }
 
-    private void addNote(){
-        DialogPlus dialog = new DialogPlus.Builder(context)
-                .setAdapter(this)
-                .setGravity(DialogPlus.Gravity.CENTER)
-                .setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(DialogPlus dialog, Object item, View view, int position) {
-                    }
-                })
-                .create();
-        dialog.show();
+    private void addNote(final FoodOrder foodOrder, final BootstrapEditText textView) {
+        final AddNoteDialog addNoteDialog = new AddNoteDialog(context);
+        addNoteDialog.setContentView(R.layout.dialog_edittext);
+        addNoteDialog.setTitle(Util.getStringById(context, R.string.add_note));
+
+        BootstrapButton clear = (BootstrapButton) addNoteDialog.findViewById(R.id.btn_clear);
+        BootstrapButton done = (BootstrapButton) addNoteDialog.findViewById(R.id.btn_done);
+        final BootstrapEditText dialogText = (BootstrapEditText) addNoteDialog.findViewById(R.id.et_add_note);
+        dialogText.append(textView.getText());
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogText.getText().clear();
+            }
+        });
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                foodOrder.setNote(dialogText.getText().toString());
+                textView.setText(foodOrder.getNote());
+                addNoteDialog.dismiss();
+            }
+        });
+
+        addNoteDialog.show();
     }
 }

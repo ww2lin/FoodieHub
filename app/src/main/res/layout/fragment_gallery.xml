@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -7,32 +8,38 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/standard_large_gap_size">
 
-        <EditText
+        <com.beardedhen.androidbootstrap.BootstrapEditText
             android:id="@+id/et_table_number"
-            android:layout_width="0dp"
+            android:layout_width="235dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:hint="@string/table_number" />
+            android:hint="@string/table_number"
+            android:paddingStart="@dimen/standard_gap_size"
+            android:paddingEnd="@dimen/standard_gap_size" />
 
-        <Button
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/btn_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/submit" />
+            android:paddingStart="@dimen/standard_gap_size"
+            android:paddingEnd="@dimen/standard_gap_size"
+            android:text="@string/submit"
+            bootstrap:bb_roundedCorners="true" />
+
     </LinearLayout>
 
     <GridView
         android:id="@+id/gv_menu_gallery"
-        android:numColumns="auto_fit"
-        android:gravity="center"
-        android:columnWidth="100dp"
-        android:verticalSpacing="@dimen/standard_gap_size"
-        android:clipChildren="true"
-        android:stretchMode="spacingWidthUniform"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:clipChildren="true"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="@dimen/standard_gap_size">
 
     </GridView>
 

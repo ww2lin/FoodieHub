@@ -37,4 +37,8 @@ public class Util {
     public static ObjectMapper getMapper() {
         return mapper;
     }
+
+    public static String getStringById(Context context, int resourceId){
+        return context.getResources().getString(resourceId);
+    }
 }

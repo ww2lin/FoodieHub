@@ -9,6 +9,16 @@
 
     <dimen name="standard_textbox_width">300dp</dimen>
     <dimen name="standard_textbox_height">40dp</dimen>
+
+    <dimen name="standard_editbox_width">120dp</dimen>
+    <dimen name="standard_editbox_height">80dp</dimen>
+
+    <dimen name="large_editbox_width">300dp</dimen>
+    <dimen name="large_editbox_height">150dp</dimen>
+
+    <dimen name="standard_button_width">80dp</dimen>
+    <dimen name="standard_button_height">60dp</dimen>
+
     <dimen name="large_textsize">26sp</dimen>
     <dimen name="standard_textsize">13sp</dimen>
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_color">#ffffaf34</color>
+    <color name="actionbar_color">#ffffaf34</color>
     <color name="navigation_color">#FFF5DEB6</color>
     <color name="main_color">#6effc86d</color>
     <color name="navigation_item_color">#ff3e3f4d</color>
+    <color name="image_border">#ffffd18b</color>
 
 </resources>

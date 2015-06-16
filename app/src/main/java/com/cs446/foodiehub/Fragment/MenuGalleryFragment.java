@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.Api.MenuRequest;
 import com.cs446.foodiehub.Interface.SeverResponse;
@@ -48,8 +48,8 @@ public class MenuGalleryFragment extends Fragment {
         mTotalPrice = 0;
         View rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        final Button submit = (Button) rootView.findViewById(R.id.btn_submit);
-        final EditText tableNumber = (EditText) rootView.findViewById(R.id.et_table_number);
+        final BootstrapButton submit = (BootstrapButton) rootView.findViewById(R.id.btn_submit);
+        final BootstrapEditText tableNumber = (BootstrapEditText) rootView.findViewById(R.id.et_table_number);
 
 //        mImageAdapter = new ImageAdapter(getActivity(), mMenu);
 

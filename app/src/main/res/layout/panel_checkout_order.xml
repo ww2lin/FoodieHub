@@ -11,13 +11,13 @@
         android:layout_marginStart="@dimen/standard_large_gap_size"
         android:layout_marginEnd="@dimen/standard_large_gap_size" />
 
-    <Button
-        android:id="@+id/btn_note"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/et_note"
+        android:layout_width="@dimen/standard_editbox_width"
+        android:layout_height="@dimen/standard_editbox_height"
         android:layout_margin="@dimen/standard_large_gap_size"
         android:layout_toEndOf="@id/iv_menu_image"
-        android:text="@string/add_note" />
+        android:hint="@string/click_add_note" />
 
     <TextView
         android:id="@+id/tv_price"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/standard_large_gap_size"
-        android:layout_toEndOf="@id/btn_note"
+        android:layout_toEndOf="@id/et_note"
         android:gravity="end" />
 
 </RelativeLayout>

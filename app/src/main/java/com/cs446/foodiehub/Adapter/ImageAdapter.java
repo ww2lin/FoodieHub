@@ -58,23 +58,12 @@ public class ImageAdapter extends BaseAdapter {
 
         final MenuItem menuItem = mUrls.get(position);
 
-
-        viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
-            }
-        });
-
-        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
-            }
-        });
+        toggleBuyItem(viewHolder.imageView, menuItem, viewHolder);
+        toggleBuyItem(viewHolder.checkBox, menuItem, viewHolder);
+        toggleBuyItem(viewHolder.price, menuItem, viewHolder);
 
         String url = mUrls.get(position).getImage();
-        mGlide.load(url).into(viewHolder.imageView);
+        mGlide.load(url).centerCrop().into(viewHolder.imageView);
         updateCheckState(context, viewHolder.checkBox, menuItem);
         viewHolder.price.setText(mUrls.get(position).getPrice());
 
@@ -111,11 +100,18 @@ public class ImageAdapter extends BaseAdapter {
         } else return Util.getDrawable(context, R.drawable.unchecked);
     }
 
+    private void toggleBuyItem(View view, final MenuItem menuItem, final ViewHolder viewHolder){
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleCheckState(v.getContext(), viewHolder.checkBox, menuItem);
+            }
+        });
+    }
+
     public ArrayList<MenuItem> getMenu(){
         return mUrls;
     }
-
-
 }
 
 

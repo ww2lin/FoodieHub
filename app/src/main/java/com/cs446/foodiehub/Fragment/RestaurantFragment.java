@@ -46,12 +46,6 @@ public class RestaurantFragment extends FoodieHubFragment {
         mListView = (ListView) rootView.findViewById(R.id.lv_restaurants);
 
         mListView.setOnItemClickListener(onItemClickListener);
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(RestaurantFragment.this.getActivity(), "you clicked on the fragment" + RestaurantFragment.this.getClass().getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
         return rootView;
     }
 
