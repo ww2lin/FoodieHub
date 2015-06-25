@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.cs446.foodiehub.Adapter.RestaurantAdapter;
 import com.cs446.foodiehub.Api.RestaurantRequest;
-import com.cs446.foodiehub.Interface.SeverResponse;
+import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.Restaurant;
@@ -70,7 +70,7 @@ public class RestaurantFragment extends FoodieHubFragment {
         return bundle.getString(EXTRA_SELECTED_RESTAURANT);
     }
 
-    private SeverResponse mServerResponse = new SeverResponse() {
+    private ServerResponse mServerResponse = new ServerResponse() {
         @Override
         public void onSuccess(int statusCode, String responseString) {
             try {

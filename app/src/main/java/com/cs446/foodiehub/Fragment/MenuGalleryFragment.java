@@ -13,7 +13,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.Api.MenuRequest;
-import com.cs446.foodiehub.Interface.SeverResponse;
+import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.FoodOrder;
@@ -100,7 +100,7 @@ public class MenuGalleryFragment extends Fragment {
 //        }
 
         mSelectedRestaurantId = RestaurantFragment.getMenu(getArguments());
-        MenuRequest.getMenu(mSelectedRestaurantId, mSeverResponse);
+        MenuRequest.getMenu(mSelectedRestaurantId, mServerResponse);
 //        mImageAdapter.notifyDataSetChanged();
     }
 
@@ -112,7 +112,7 @@ public class MenuGalleryFragment extends Fragment {
         return bundle.getDouble(EXTRA_TOTAL_PRICE);
     }
 
-    public SeverResponse mSeverResponse = new SeverResponse() {
+    public ServerResponse mServerResponse = new ServerResponse() {
         @Override
         public void onSuccess(int statusCode, String responseString) {
             try {

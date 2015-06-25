@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.cs446.foodiehub.Api.LoginRequest;
+import com.cs446.foodiehub.Interface.LoginResponse;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.Util.Util;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
@@ -47,16 +52,7 @@ public class LoginActivity extends Activity{
                 btnLogin.setVisibility(View.GONE);
                 progressWheel.spin();
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra(EXTRA_USERNAME, etUserName.getText());
-                        intent.putExtra(EXTRA_PASSWORD, etPassword.getText());
-                        startActivity(intent);
-                    }
-                }, 2000);
-
+                LoginRequest.login(etUserName.getText().toString(), etPassword.getText().toString(), loginResponse);
             }
         });
     }
@@ -73,11 +69,25 @@ public class LoginActivity extends Activity{
         progressWheel.setVisibility(View.GONE);
     }
 
-    public static String getUsername(Bundle bundle){
-        return bundle == null ? null : bundle.getString(EXTRA_USERNAME);
+    public void resetLoading(){
+        btnLogin.setVisibility(View.VISIBLE);
+        progressWheel.setVisibility(View.GONE);
     }
 
-    public static String getPassword(Bundle bundle){
-        return bundle == null? null : bundle.getString(EXTRA_PASSWORD);
-    }
+    private LoginResponse loginResponse = new LoginResponse() {
+        @Override
+        public void loginFail(int statusCode, String responseString) {
+            resetLoading();
+            Toast.makeText(LoginActivity.this, responseString, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void success(String msg) {
+            etUserName.getText().clear();
+            etPassword.getText().clear();
+            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    };
 }
