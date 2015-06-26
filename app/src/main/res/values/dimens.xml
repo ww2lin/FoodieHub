@@ -20,6 +20,7 @@
     <dimen name="standard_button_height">60dp</dimen>
 
     <dimen name="large_textsize">26sp</dimen>
+    <dimen name="big_textsize">20sp</dimen>
     <dimen name="standard_textsize">13sp</dimen>
 
     <dimen name="standard_small_gap_size">5dp</dimen>
@@ -27,7 +28,11 @@
     <dimen name="standard_large_gap_size">15dp</dimen>
     <dimen name="standard_extra_large_gap_size">25dp</dimen>
 
+    <dimen name="profile_gapsize">50dp</dimen>
+
     <dimen name="menu_image_size">100dp</dimen>
+
+    <dimen name="profile_image_size">300dp</dimen>
 
     <dimen name="restaurant_image_height">150dp</dimen>
 

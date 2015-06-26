@@ -1,7 +1,5 @@
 package com.cs446.foodiehub.Api;
 
-import android.util.Log;
-
 import com.cs446.foodiehub.Api.Http.HttpClient;
 import com.cs446.foodiehub.Interface.LoginResponse;
 import com.cs446.foodiehub.Interface.ServerResponse;
@@ -36,7 +34,7 @@ public class LoginRequest extends HttpClient{
 
                 if (token != null) {
                     setToken(token);
-                    callback.success(token);
+                    callback.success();
                 }
             } catch (Exception e){
             }

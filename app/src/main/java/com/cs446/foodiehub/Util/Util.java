@@ -5,13 +5,14 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import com.cs446.foodiehub.model.AboutMe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
  * Created by Alex on 15-06-11.
  */
-public class Util {
+public class Util<T> {
     private static final int DEVICE_API_VERSION = Build.VERSION.SDK_INT;
     private static final ObjectMapper mapper = new ObjectMapper();
     /**

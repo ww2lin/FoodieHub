@@ -5,6 +5,6 @@ package com.cs446.foodiehub.Interface;
  */
 public interface LoginResponse {
 
-    void success(String msg);
+    void success();
     void loginFail(int statusCode, String responseString);
 }

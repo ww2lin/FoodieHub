@@ -3,8 +3,6 @@ package com.cs446.foodiehub.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +11,6 @@ import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Api.LoginRequest;
 import com.cs446.foodiehub.Interface.LoginResponse;
 import com.cs446.foodiehub.R;
-import com.cs446.foodiehub.Util.Util;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 /**
@@ -24,9 +21,6 @@ public class LoginActivity extends Activity{
     private Button btnLogin;
     private BootstrapEditText etUserName;
     private BootstrapEditText etPassword;
-
-    private static final String EXTRA_USERNAME="extra_username";
-    private static final String EXTRA_PASSWORD="extra_password";
 
     private ProgressWheel progressWheel;
 
@@ -41,6 +35,8 @@ public class LoginActivity extends Activity{
 
         progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
 
+        etUserName.setText("test@test.com");
+        etPassword.setText("test");
         setupEventListener();
     }
 
@@ -82,10 +78,9 @@ public class LoginActivity extends Activity{
         }
 
         @Override
-        public void success(String msg) {
+        public void success() {
             etUserName.getText().clear();
             etPassword.getText().clear();
-            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }

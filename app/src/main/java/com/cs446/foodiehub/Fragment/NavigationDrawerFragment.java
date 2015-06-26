@@ -254,11 +254,11 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_food_checkout) {
-            // This screen should only be visible when CheckoutFragment is shown
-            Toast.makeText(getActivity(), "Order Submitted", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+//        if (item.getItemId() == R.id.action_food_checkout) {
+//            // This screen should only be visible when CheckoutFragment is shown
+//            Toast.makeText(getActivity(), "Order Submitted", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

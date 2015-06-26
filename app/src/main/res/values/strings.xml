@@ -27,6 +27,12 @@
     <string name="notes">Notes</string>
     <string name="total">Total</string>
 
+    <!-- AboutMeFragment -->
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="balance">Balance:</string>
+
+
     <!-- hints -->
     <string name="add_note">Add note</string>
     <string name="click_add_note">Click here to add notes!</string>
@@ -42,5 +48,6 @@
     <string name="connection_fail">Connection has Failed</string>
 
     <string name="login_fail">Login fail</string>
+
 
 </resources>

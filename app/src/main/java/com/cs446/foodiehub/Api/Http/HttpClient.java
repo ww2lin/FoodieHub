@@ -14,15 +14,14 @@ public class HttpClient {
     private static final String hostUrl = "http://104.236.250.210:8000/";
 
     private static AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
-
-    // The token is shared across all Request
-    private static String token;
+    private static String KEY_BEARER = "Bearer";
+    private static String  KEY_AUTHORIZATION = "Authorization";
 
     protected HttpClient() {
     }
 
     protected static void ExecuteGetRequest(String url,final ServerResponse serverResponse) {
-        HttpClient.ExecuteGetRequest(hostUrl+url, serverResponse);
+        client.get(hostUrl + url, executeRequest(serverResponse));
     }
 
     protected static void ExecuteGetRequest(String url, RequestParams params,final ServerResponse serverResponse) {
@@ -48,7 +47,7 @@ public class HttpClient {
     }
 
     protected static void setToken(String token){
-        HttpClient.token = token;
+        client.addHeader(KEY_AUTHORIZATION, KEY_BEARER+" "+token);
     }
 
 }

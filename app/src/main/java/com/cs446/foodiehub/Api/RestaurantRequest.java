@@ -9,8 +9,6 @@ import com.loopj.android.http.RequestParams;
  */
 public class RestaurantRequest extends HttpClient{
     private static String mRestaruantUrl = "api/restaurants";
-    private double mLatitude;
-    private double mLongitude;
 
     public static void getRestaurants(ServerResponse serverResponse){
         RequestParams data = new RequestParams();
