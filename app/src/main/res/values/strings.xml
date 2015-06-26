@@ -35,6 +35,8 @@
 
     <!-- hints -->
     <string name="add_note">Add note</string>
+    <string name="description">Description</string>
+    <string name="no_description">There does not seem to be a description for this food :(</string>
     <string name="click_add_note">Click here to add notes!</string>
 
     <!--defaults -->

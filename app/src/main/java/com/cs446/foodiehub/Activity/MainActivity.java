@@ -9,8 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cs446.foodiehub.Factory.FragmentTypeFactory;
-import com.cs446.foodiehub.Fragment.FoodieHubFragment;
+import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Fragment.FragmentType;
+import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.Fragment.NavigationDrawerFragment;
 import com.cs446.foodiehub.Fragment.RestaurantFragment;
 import com.cs446.foodiehub.R;
@@ -115,6 +116,17 @@ public class MainActivity extends FoodieHubActivity
             return true;
         }
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment instanceof MenuFoodieHubFragment &&
+                    ((MenuFoodieHubFragment) fragment).overrideActionBar()) {
+                // We found a currently visible fragment
+               if (((MenuFoodieHubFragment) fragment).onMenuSelected(item)){
+                    return true;
+                }
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 

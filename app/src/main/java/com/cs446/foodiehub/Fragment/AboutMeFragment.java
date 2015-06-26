@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cs446.foodiehub.Api.UserRequest;
+import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;

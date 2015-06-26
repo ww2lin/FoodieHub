@@ -1,4 +1,4 @@
-package com.cs446.foodiehub.Fragment;
+package com.cs446.foodiehub.Fragment.base;
 
 
 import android.support.v4.app.Fragment;

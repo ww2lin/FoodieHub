@@ -1,5 +1,6 @@
 package com.cs446.foodiehub.model;
 
+import com.cs446.foodiehub.model.base.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AboutMe extends BaseModel{
+public class AboutMe extends BaseModel {
 
     @JsonProperty("provider")
     String provider;

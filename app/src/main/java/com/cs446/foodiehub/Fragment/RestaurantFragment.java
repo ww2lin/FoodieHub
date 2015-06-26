@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,12 +12,12 @@ import android.widget.Toast;
 
 import com.cs446.foodiehub.Adapter.RestaurantAdapter;
 import com.cs446.foodiehub.Api.RestaurantRequest;
+import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.Restaurant;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -49,13 +48,6 @@ public class RestaurantFragment extends FoodieHubFragment {
 
         mListView.setOnItemClickListener(onItemClickListener);
         return rootView;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int x =0;
-        int y = 0;
-        Logger.e("item is "+item);
-        return true;
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {

@@ -4,21 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs446.foodiehub.Adapter.FoodOrderAdapter;
+import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.FoodOrder;
+import com.cs446.foodiehub.model.server.OrderItem;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
 /**
  * Created by Alex on 15-06-09.
  */
-public class CheckoutFragment extends FoodieHubFragment {
+public class CheckoutFragment extends MenuFoodieHubFragment {
 
     private ArrayList<FoodOrder> mFoodOrders;
     private FoodOrderAdapter mFoodOrderAdapter;
@@ -56,5 +62,18 @@ public class CheckoutFragment extends FoodieHubFragment {
     @Override
     public boolean populateCustomActionBar(){
         return true;
+    }
+
+    @Override
+    public boolean onMenuSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_food_checkout) {
+            JSONArray orderItems = new JSONArray();
+            for (FoodOrder foodOrder : mFoodOrders){
+                orderItems.put(OrderItem.toJSON(foodOrder.getServerId(), foodOrder.getQuantity().toString(), foodOrder.getNote()));
+            }
+            Toast.makeText(getActivity(), orderItems.toString(), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 }

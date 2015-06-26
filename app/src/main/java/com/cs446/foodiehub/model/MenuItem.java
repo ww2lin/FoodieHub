@@ -20,6 +20,7 @@ public class MenuItem implements Parcelable {
     @JsonProperty("price")
     private String mPrice;
     private String mCategory;
+    @JsonProperty("_id")
     private String mServerId;
 
     private boolean checked;
@@ -89,6 +90,7 @@ public class MenuItem implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
         dest.writeString(mName);
         dest.writeString(mDescription);
         dest.writeString(mImage);
@@ -98,6 +100,7 @@ public class MenuItem implements Parcelable {
     }
 
     public void readFromParcel(Parcel in) {
+        mId = in.readString();
         mName = in.readString();
         mDescription = in.readString();
         mImage = in.readString();
