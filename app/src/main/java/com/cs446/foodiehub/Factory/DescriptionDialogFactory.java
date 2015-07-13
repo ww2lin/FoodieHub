@@ -27,6 +27,7 @@ public class DescriptionDialogFactory {
         addNoteDialog.hideClearButton();
         addNoteDialog.getDialogText().setEnabled(false);
         addNoteDialog.getDialogText().setTextColor(Color.BLACK);
+        addNoteDialog.setScrollableText();
         addNoteDialog.show();
         return addNoteDialog;
     }

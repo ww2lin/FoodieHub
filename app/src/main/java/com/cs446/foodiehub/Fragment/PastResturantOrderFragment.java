@@ -62,6 +62,7 @@ public class PastResturantOrderFragment extends FoodieHubFragment {
                 ArrayList<MenuItem> menuItems = new ArrayList<>(recentOrders.size());
                 for (RecentOrder recentOrder : recentOrders){
                     menuItems.addAll(recentOrder.getMenuItems());
+                    recentOrder.getMenuItems().get(0).setmDescription("This is a REALLLLLY Longggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg string gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
                 }
                 mRestaurants = new PastOrderAdapter(getActivity(), menuItems);
                 mListView.setAdapter(mRestaurants);

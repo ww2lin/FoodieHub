@@ -78,6 +78,10 @@ public class MenuItem implements Parcelable {
         return mServerId;
     }
 
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
     /**
      * Parcelable interface
      */

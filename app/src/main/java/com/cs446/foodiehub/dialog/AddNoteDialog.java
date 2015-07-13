@@ -1,7 +1,9 @@
 package com.cs446.foodiehub.dialog;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.Scroller;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
@@ -14,10 +16,11 @@ import com.cs446.foodiehub.Util.Util;
 public class AddNoteDialog extends FoodieHubDialog{
     private BootstrapEditText dialogText;
     private BootstrapButton clear;
+    private Context context;
 
     public AddNoteDialog(Context context, String title, String defaultText, final AddNoteDialogCallback addNoteDialogCallback) {
         super(context);
-
+        this.context = context;
         setContentView(R.layout.dialog_edittext);
         setTitle(title);
 
@@ -61,5 +64,11 @@ public class AddNoteDialog extends FoodieHubDialog{
     public AddNoteDialog hideClearButton(){
         clear.setVisibility(View.GONE);
         return this;
+    }
+
+    public void setScrollableText(){
+        dialogText.setScroller(new Scroller(context));
+        dialogText.setVerticalScrollBarEnabled(true);
+        dialogText.setMovementMethod(new ScrollingMovementMethod());
     }
 }

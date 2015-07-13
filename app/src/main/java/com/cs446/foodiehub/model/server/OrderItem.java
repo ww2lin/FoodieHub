@@ -11,12 +11,11 @@ import org.json.JSONObject;
 //{order_items:[{id, quantity, custom_note}]}
 public class OrderItem {
 
-    public static JSONObject toJSON(String id, String quantity, String note){
+    public static JSONObject toJSON(String id, String note){
 
         JSONObject jsonObject= new JSONObject();
         try {
             jsonObject.put("id", id);
-            jsonObject.put("quantity", quantity);
             jsonObject.put("note", note);
             return jsonObject;
         } catch (JSONException e) {

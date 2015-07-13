@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/standard_small_gap_size"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/standard_small_gap_size">
 
 
     <RelativeLayout
         android:id="@+id/photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:background="@drawable/rect_background"
+        android:gravity="center_vertical"
         android:padding="5dp">
 
         <ImageView
@@ -30,19 +30,21 @@
 
     <com.devspark.robototextview.widget.RobotoTextView
         android:id="@+id/tv_description"
-        android:layout_width="@dimen/standard_editbox_height"
+        android:layout_width="0dp"
         android:layout_height="@dimen/menu_image_size"
-        android:layout_toEndOf="@id/photo"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:padding="@dimen/standard_small_gap_size"
+        android:paddingTop="@dimen/standard_large_gap_size"
         app:fontFamily="roboto"
+        android:ellipsize="end"
+        android:maxLines="4"
         app:typeface="roboto_light_italic" />
 
     <TextView
         android:id="@+id/tv_price"
-        android:layout_centerInParent="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/tv_description"
-        android:layout_width="@dimen/menu_image_size"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:gravity="center_vertical" />
 
-</RelativeLayout>
+</LinearLayout>

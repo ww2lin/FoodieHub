@@ -76,9 +76,8 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
         if (item.getItemId() == R.id.action_food_checkout) {
             JSONArray orderItems = new JSONArray();
             for (FoodOrder foodOrder : mFoodOrders){
-                orderItems.put(OrderItem.toJSON(foodOrder.getServerId(), foodOrder.getQuantity().toString(), foodOrder.getNote()));
+                orderItems.put(OrderItem.toJSON(foodOrder.getServerId(), foodOrder.getNote()));
             }
-            Toast.makeText(getActivity(), orderItems.toString(), Toast.LENGTH_SHORT).show();
             SubmitFoodOrder.submitOrder(mResturantid, mTableId, orderItems, mResponse);
             return true;
         }

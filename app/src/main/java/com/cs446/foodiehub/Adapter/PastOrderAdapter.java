@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.MenuItem;
 import com.devspark.robototextview.widget.RobotoTextView;
@@ -68,6 +69,13 @@ public class PastOrderAdapter extends BaseAdapter {
         viewHolder.price.setText(menuItem.getPrice());
         viewHolder.name.setText(menuItem.getName());
         viewHolder.description.setText(menuItem.getDescription());
+
+        viewHolder.description.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DescriptionDialogFactory.build(context, R.string.description, viewHolder.description.getText().toString()).show();
+            }
+        });
         return convertView;
     }
 
