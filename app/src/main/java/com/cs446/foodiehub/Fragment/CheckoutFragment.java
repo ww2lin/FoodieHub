@@ -93,7 +93,7 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
 
         @Override
         public void onFailure(int statusCode, String responseString) {
-            Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "fail: "+responseString , Toast.LENGTH_SHORT).show();
         }
     };
 }

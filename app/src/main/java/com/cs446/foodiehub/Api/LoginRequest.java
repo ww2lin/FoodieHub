@@ -17,6 +17,9 @@ public class LoginRequest extends HttpClient{
     private static final String KEY_LOGIN = "auth/local";
     private static LoginResponse callback;
 
+    private static String mRole;
+    private static String mResturantId;
+
     public static void login(String username, String password, LoginResponse loginResponse){
         RequestParams data = new RequestParams();
         data.put(KEY_EMAIL, username);
@@ -31,7 +34,10 @@ public class LoginRequest extends HttpClient{
             try {
                 JSONObject jsonObj = new JSONObject(responseString);
                 String token = jsonObj.getString("token");
-
+                if (jsonObj.has("role")) {
+                    mRole = jsonObj.getString("role");
+                    mResturantId = jsonObj.getString("restaurantid");
+                }
                 if (token != null) {
                     setToken(token);
                     callback.success();
@@ -52,5 +58,11 @@ public class LoginRequest extends HttpClient{
         }
     };
 
+    public static boolean isOwner(){
+        return "owner".equalsIgnoreCase(mRole);
+    }
 
+    public static String getResturant(){
+        return mResturantId;
+    }
 }

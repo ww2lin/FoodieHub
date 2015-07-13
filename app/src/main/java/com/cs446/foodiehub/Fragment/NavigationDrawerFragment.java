@@ -22,8 +22,12 @@ import android.widget.Toast;
 
 import com.cs446.foodiehub.Activity.FoodieHubActivity;
 import com.cs446.foodiehub.Adapter.NavigationAdapter;
+import com.cs446.foodiehub.Api.LoginRequest;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.NavigationItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -101,6 +105,12 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
+
+        List<NavigationItem> navigationItems = new ArrayList<>();
+        if (LoginRequest.isOwner()){
+//            navigationItems.add
+        }
         mNavigationAdapter = new NavigationAdapter(
                 getActionBar().getThemedContext(),
                 new NavigationItem[]{ new NavigationItem(FragmentType.RESTAURANT, R.drawable.restaurant),

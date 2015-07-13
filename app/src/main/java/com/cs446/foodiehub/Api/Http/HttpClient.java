@@ -6,6 +6,8 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
 
 /**
  * Created by Alex on 15-06-12.
@@ -30,6 +32,10 @@ public class HttpClient {
 
     protected static void ExecutePostRequest(String url, RequestParams params, final ServerResponse serverResponse) {
         client.post(hostUrl + url, params, executeRequest(serverResponse));
+    }
+
+    protected static void ExecuteJsonPostRequest(String url, JSONObject jsonObject, final ServerResponse serverResponse) throws Exception {
+        client.post(null, hostUrl + url, new StringEntity(jsonObject.toString()), "application/json", executeRequest(serverResponse));
     }
 
     private static TextHttpResponseHandler executeRequest(final ServerResponse serverResponse) {
