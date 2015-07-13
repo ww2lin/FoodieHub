@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cs446.foodiehub.Adapter.FoodOrderAdapter;
+import com.cs446.foodiehub.Api.SubmitFoodOrder;
 import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
+import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.FoodOrder;
 import com.cs446.foodiehub.model.server.OrderItem;
@@ -28,6 +30,8 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
 
     private ArrayList<FoodOrder> mFoodOrders;
     private FoodOrderAdapter mFoodOrderAdapter;
+    private String mTableId;
+    private String mResturantid;
     private ListView mListView;
     private TextView mTotalPrice;
 
@@ -48,6 +52,9 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
 
         mTotalPrice = (TextView) rootView.findViewById(R.id.tv_total_price);
         mTotalPrice.setText(MenuGalleryFragment.getTotalPrice(getArguments()).toString());
+
+        mTableId = MenuGalleryFragment.getTableId(getArguments());
+        mResturantid = MenuGalleryFragment.getRestrauntId(getArguments());
 
         setHasOptionsMenu(true);
         return rootView;
@@ -72,8 +79,22 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
                 orderItems.put(OrderItem.toJSON(foodOrder.getServerId(), foodOrder.getQuantity().toString(), foodOrder.getNote()));
             }
             Toast.makeText(getActivity(), orderItems.toString(), Toast.LENGTH_SHORT).show();
+            SubmitFoodOrder.submitOrder(mResturantid, mTableId, orderItems, mResponse);
             return true;
         }
         return false;
     }
+
+    ServerResponse mResponse = new ServerResponse() {
+        @Override
+        public void onSuccess(int statusCode, String responseString) {
+            // redirect to home page.
+            Toast.makeText(getActivity(), "Sucess", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onFailure(int statusCode, String responseString) {
+            Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

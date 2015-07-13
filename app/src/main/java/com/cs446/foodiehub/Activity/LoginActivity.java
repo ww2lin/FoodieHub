@@ -56,13 +56,12 @@ public class LoginActivity extends Activity{
     @Override
     public void onResume(){
         super.onResume();
-        btnLogin.setVisibility(View.VISIBLE);
+        resetLoading();
     }
 
     @Override
     public void onPause(){
         super.onPause();
-        progressWheel.setVisibility(View.GONE);
     }
 
     public void resetLoading(){
@@ -73,8 +72,8 @@ public class LoginActivity extends Activity{
     private LoginResponse loginResponse = new LoginResponse() {
         @Override
         public void loginFail(int statusCode, String responseString) {
-            resetLoading();
             Toast.makeText(LoginActivity.this, responseString, Toast.LENGTH_SHORT).show();
+            resetLoading();
         }
 
         @Override

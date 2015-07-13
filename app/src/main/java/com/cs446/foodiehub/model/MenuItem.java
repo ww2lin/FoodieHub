@@ -14,11 +14,13 @@ public class MenuItem implements Parcelable {
     private String mId;
     @JsonProperty("name")
     private String mName;
+    @JsonProperty("description")
     private String mDescription;
     @JsonProperty("picture")
     private String mImage;
     @JsonProperty("price")
     private String mPrice;
+    @JsonProperty("category")
     private String mCategory;
     @JsonProperty("_id")
     private String mServerId;

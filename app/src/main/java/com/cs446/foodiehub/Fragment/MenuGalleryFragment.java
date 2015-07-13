@@ -30,13 +30,14 @@ import java.util.ArrayList;
 public class MenuGalleryFragment extends Fragment {
 
     private GridView gridView;
-//    private ArrayList<MenuItem> mMenu;
     private ImageAdapter mImageAdapter;
-    private String mSelectedRestaurantId;
+    private String mResturantId;
     private double mTotalPrice = 0;
 
     private static final String EXTRA_FOOD_ORDER = "extra_food_order";
     private static final String EXTRA_TOTAL_PRICE = "extra_total_price";
+    private static final String EXTRA_TABLE_ID = "extra_table_id";
+    private static final String EXTRA_RESTURANT_ID = "extra table";
 
     /**
      * Called when the activity is first created.
@@ -50,8 +51,7 @@ public class MenuGalleryFragment extends Fragment {
 
         final BootstrapButton submit = (BootstrapButton) rootView.findViewById(R.id.btn_submit);
         final BootstrapEditText tableNumber = (BootstrapEditText) rootView.findViewById(R.id.et_table_number);
-
-//        mImageAdapter = new ImageAdapter(getActivity(), mMenu);
+        final BootstrapButton mRecentButton = (BootstrapButton) rootView.findViewById(R.id.btn_recent_orders);
 
         loadMenu();
         gridView = (GridView) rootView.findViewById(R.id.gv_menu_gallery);
@@ -59,21 +59,41 @@ public class MenuGalleryFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Since mMenu was passed by reference into the adapter
-                // thus we just fetch the "MenuItem.checked" field inside mMenu
-                // for all the photos;
-                ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
-                for (MenuItem menuItem : mImageAdapter.getMenu()) {
-                    if (menuItem.isChecked()) {
-                        selectedFood.add(new FoodOrder(menuItem.getName(), menuItem.getServerId(), menuItem.getImage(), menuItem.getPrice(), menuItem.getDescription()));
-                        mTotalPrice+=Double.parseDouble(menuItem.getPrice());
+                String tableId = tableNumber.getEditableText().toString();
+                if (tableId != null && tableId.trim().length() > 0 ) {
+                    // Since mMenu was passed by reference into the adapter
+                    // thus we just fetch the "MenuItem.checked" field inside mMenu
+                    // for all the photos;
+                    ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
+                    for (MenuItem menuItem : mImageAdapter.getMenu()) {
+                        if (menuItem.isChecked()) {
+                            selectedFood.add(new FoodOrder(menuItem.getName(), menuItem.getServerId(), menuItem.getImage(), menuItem.getPrice(), menuItem.getDescription()));
+                            mTotalPrice += Double.parseDouble(menuItem.getPrice());
+                        }
                     }
+                    // Open the checkout page
+                    Fragment mFragment = new CheckoutFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList(EXTRA_FOOD_ORDER, selectedFood);
+                    bundle.putDouble(EXTRA_TOTAL_PRICE, mTotalPrice);
+                    bundle.putString(EXTRA_RESTURANT_ID, mResturantId);
+                    bundle.putString(EXTRA_TABLE_ID, tableId);
+                    // set Fragmentclass Arguments
+                    mFragment.setArguments(bundle);
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, mFragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
                 }
-                // Open the checkout page
-                Fragment mFragment = new CheckoutFragment();
+            }
+        });
+
+        mRecentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment mFragment = new PastResturantOrderFragment();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(EXTRA_FOOD_ORDER, selectedFood);
-                bundle.putDouble(EXTRA_TOTAL_PRICE, mTotalPrice);
+                bundle.putString(EXTRA_RESTURANT_ID, mResturantId);
                 // set Fragmentclass Arguments
                 mFragment.setArguments(bundle);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -94,9 +114,23 @@ public class MenuGalleryFragment extends Fragment {
         // user clicks back on Checkout fragment
         // Easy way is to check against the id
 
-        mSelectedRestaurantId = RestaurantFragment.getMenu(getArguments());
-        MenuRequest.getMenu(mSelectedRestaurantId, mServerResponse);
+        mResturantId = RestaurantFragment.getMenu(getArguments());
+        MenuRequest.getMenu(mResturantId, mServerResponse);
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Fragment mFragment = new PastResturantOrderFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString(EXTRA_RESTURANT_ID, mResturantId);
+//        // set Fragmentclass Arguments
+//        mFragment.setArguments(bundle);
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.container, mFragment);
+//        ft.addToBackStack(null);
+//        ft.commit();
+//    }
 
     public static ArrayList<FoodOrder> getFoodOrder(Bundle bundle) {
         return bundle.getParcelableArrayList(EXTRA_FOOD_ORDER);
@@ -104,6 +138,14 @@ public class MenuGalleryFragment extends Fragment {
 
     public static Double getTotalPrice(Bundle bundle){
         return bundle.getDouble(EXTRA_TOTAL_PRICE);
+    }
+
+    public static String getRestrauntId(Bundle bundle){
+        return bundle.getString(EXTRA_RESTURANT_ID);
+    }
+
+    public static String getTableId(Bundle bundle){
+        return bundle.getString(EXTRA_TABLE_ID);
     }
 
     public ServerResponse mServerResponse = new ServerResponse() {
@@ -117,6 +159,7 @@ public class MenuGalleryFragment extends Fragment {
                 });
                 mImageAdapter = new ImageAdapter(getActivity(), menuUrls);
                 gridView.setAdapter(mImageAdapter);
+
 
             } catch (Exception e) {
                 e.printStackTrace();

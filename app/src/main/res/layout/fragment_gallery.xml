@@ -31,9 +31,10 @@
     </LinearLayout>
 
     <GridView
+        android:layout_weight="1"
         android:id="@+id/gv_menu_gallery"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:clipChildren="true"
         android:columnWidth="100dp"
         android:gravity="center"
@@ -43,9 +44,14 @@
 
     </GridView>
 
-    <!--<ListView-->
-    <!--android:id="@+id/results"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent" />-->
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btn_recent_orders"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/standard_gap_size"
+        android:paddingStart="@dimen/standard_gap_size"
+        android:paddingEnd="@dimen/standard_gap_size"
+        android:text="@string/recent_order"
+        bootstrap:bb_roundedCorners="true" />
 
 </LinearLayout>
