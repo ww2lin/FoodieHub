@@ -12,10 +12,9 @@ import android.widget.TextView;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.cs446.foodiehub.R;
-import com.cs446.foodiehub.Util.Util;
-import com.cs446.foodiehub.dialog.AddNoteDialog;
 import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
+import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.dialog.AddNoteDialog;
 import com.cs446.foodiehub.model.FoodOrder;
 
 import java.util.ArrayList;
@@ -99,22 +98,23 @@ public class CheckoutFoodOrderAdapter extends BaseAdapter {
     }
 
     private void addNote(final FoodOrder foodOrder, final BootstrapEditText textView) {
-        new AddNoteDialog(context, Util.getStringById(context, R.string.add_note), Util.getStringById(context, R.string.clear), Util.getStringById(context, R.string.done), textView.getText().toString(), new AddNoteDialog.AddNoteDialogCallback() {
-            @Override
-            public void onDone(AddNoteDialog addNoteDialog) {
-                foodOrder.setNote(addNoteDialog.getDialogText().getText().toString());
-                textView.setText(foodOrder.getNote());
-                addNoteDialog.dismiss();
-            }
+        DescriptionDialogFactory.buildGeneralDialog(context, R.string.add_note, R.string.clear, R.string.done, textView.getText().toString(),
+                new AddNoteDialog.AddNoteDialogCallback() {
+                    @Override
+                    public void onDone(AddNoteDialog addNoteDialog, Object object) {
+                        foodOrder.setNote(addNoteDialog.getDialogText().getText().toString());
+                        textView.setText(foodOrder.getNote());
+                        addNoteDialog.dismiss();
+                    }
 
-            @Override
-            public void onClear(AddNoteDialog addNoteDialog) {
-                addNoteDialog.getDialogText().getText().clear();
-            }
-        }).show();
+                    @Override
+                    public void onClear(AddNoteDialog addNoteDialog, Object object) {
+                        addNoteDialog.getDialogText().getText().clear();
+                    }
+                }).show();
     }
 
-    private void showDescription(View view, final String descprtion){
+    private void showDescription(View view, final String descprtion) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

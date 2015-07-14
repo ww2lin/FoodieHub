@@ -53,7 +53,7 @@ public class OrderHistoryFragment extends FoodieHubFragment {
 
                 orderHistoryAdapter = new OrderHistoryAdapter(getActivity());
                 for (RecentOrder recentOrder : recentOrders){
-                    orderHistoryAdapter.addSectionHeaderItem(recentOrder.getRestaurant().getName(), recentOrder.getDate());
+                    orderHistoryAdapter.addSectionHeaderItem(recentOrder);
                     for (MenuItem menuItem : recentOrder.getMenuItems()) {
                         orderHistoryAdapter.addItem(menuItem);
                     }

@@ -8,7 +8,7 @@ import com.cs446.foodiehub.Interface.ServerResponse;
  */
 public class UserRequest extends HttpClient{
 
-    private static String mRestaruantUrl = "api/users/me";
+    private static final String mRestaruantUrl = "api/users/me";
 
     public static void getUser(ServerResponse serverResponse){
         ExecuteGetRequest(mRestaruantUrl, serverResponse);

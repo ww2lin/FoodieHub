@@ -14,17 +14,17 @@ import com.cs446.foodiehub.dialog.AddNoteDialog;
 public class DescriptionDialogFactory {
 
     public static AddNoteDialog buildNoteDialog(Context context, @StringRes int stringResId, final String descprtion) {
-        AddNoteDialog addNoteDialog = new AddNoteDialog(context, Util.getStringById(context, stringResId), Util.getStringById(context, R.string.clear),Util.getStringById(context, R.string.done), descprtion, new AddNoteDialog.AddNoteDialogCallback() {
+        AddNoteDialog addNoteDialog = new AddNoteDialog(context, Util.getStringById(context, stringResId), Util.getStringById(context, R.string.clear), Util.getStringById(context, R.string.done), descprtion, new AddNoteDialog.AddNoteDialogCallback() {
             @Override
-            public void onDone(AddNoteDialog addNoteDialog) {
+            public void onDone(AddNoteDialog addNoteDialog, Object object) {
                 addNoteDialog.dismiss();
             }
 
             @Override
-            public void onClear(AddNoteDialog addNoteDialog) {
+            public void onClear(AddNoteDialog addNoteDialog, Object object) {
                 // not interested
             }
-        });
+        }, null);
         addNoteDialog.hideClearButton();
         addNoteDialog.setReadOnlyMode();
         addNoteDialog.getDialogText().setTextColor(Color.BLACK);
@@ -32,15 +32,18 @@ public class DescriptionDialogFactory {
         return addNoteDialog;
     }
 
-    public static AddNoteDialog buildNoteDialog(Context context, @StringRes int stringResId, @StringRes int descprtion) {
-        return buildNoteDialog(context, stringResId, Util.getStringById(context, descprtion));
+    public static AddNoteDialog buildNoteDialog(Context context, @StringRes int stringResId, @StringRes int description) {
+        return buildNoteDialog(context, stringResId, Util.getStringById(context, description));
     }
 
-    public static AddNoteDialog buildGeneralDialog(Context context, @StringRes int title, @StringRes int btn1, @StringRes int btn2, AddNoteDialog.AddNoteDialogCallback addNoteDialogCallback) {
-        AddNoteDialog addNoteDialog = new AddNoteDialog(context, Util.getStringById(context, title), Util.getStringById(context,btn1), Util.getStringById(context,btn2), "", addNoteDialogCallback);
+    public static AddNoteDialog buildGeneralDialog(Context context, @StringRes int title, @StringRes int btn1, @StringRes int btn2, String defaultText, AddNoteDialog.AddNoteDialogCallback addNoteDialogCallback, Object object) {
+        AddNoteDialog addNoteDialog = new AddNoteDialog(context, Util.getStringById(context, title), Util.getStringById(context,btn1), Util.getStringById(context,btn2), defaultText, addNoteDialogCallback, object);
         addNoteDialog.getDialogText().setTextColor(Color.BLACK);
-//        addNoteDialog.setScrollableText();
         addNoteDialog.show();
         return addNoteDialog;
+    }
+
+    public static AddNoteDialog buildGeneralDialog(Context context, @StringRes int title, @StringRes int btn1, @StringRes int btn2, String defaultText, AddNoteDialog.AddNoteDialogCallback addNoteDialogCallback) {
+        return buildGeneralDialog(context, title,btn1, btn2, defaultText, addNoteDialogCallback, null);
     }
 }

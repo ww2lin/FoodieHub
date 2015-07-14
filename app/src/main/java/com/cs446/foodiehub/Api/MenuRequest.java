@@ -9,7 +9,7 @@ import com.loopj.android.http.RequestParams;
  */
 public class MenuRequest extends HttpClient{
 
-    private static String mMenuUrl = "api/menu";
+    private static final String mMenuUrl = "api/menu";
     private static final String KEY_RESTAURANT_ID="restaurantid";
     private double mLatitude;
     private double mLongitude;

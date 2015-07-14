@@ -8,7 +8,7 @@ import com.loopj.android.http.RequestParams;
  * Created by Alex on 15-06-12.
  */
 public class RestaurantRequest extends HttpClient{
-    private static String mRestaruantUrl = "api/restaurants";
+    private static final String mRestaruantUrl = "api/restaurants";
 
     public static void getRestaurants(ServerResponse serverResponse){
         RequestParams data = new RequestParams();

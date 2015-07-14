@@ -7,7 +7,6 @@ import android.view.View;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.R;
-import com.cs446.foodiehub.Util.Util;
 
 /**
  * Created by Alex on 15-06-15.
@@ -17,7 +16,7 @@ public class AddNoteDialog extends FoodieHubDialog{
     private BootstrapButton clear;
     private Context context;
 
-    public AddNoteDialog(Context context, String title, String btn1, String btn2, String defaultText, final AddNoteDialogCallback addNoteDialogCallback) {
+    public AddNoteDialog(Context context, String title, String btn1, String btn2, String defaultText, final AddNoteDialogCallback addNoteDialogCallback, final Object extraData) {
         super(context);
         this.context = context;
         setContentView(R.layout.dialog_edittext);
@@ -26,19 +25,19 @@ public class AddNoteDialog extends FoodieHubDialog{
         clear = (BootstrapButton) findViewById(R.id.btn_clear);
         BootstrapButton done = (BootstrapButton) findViewById(R.id.btn_done);
         dialogText = (BootstrapEditText) findViewById(R.id.et_add_note);
-        dialogText.append(defaultText == null ? Util.getStringById(context, R.string.no_description) : defaultText);
+        if (defaultText!= null) dialogText.append(defaultText);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (addNoteDialogCallback != null)
-                    addNoteDialogCallback.onClear(AddNoteDialog.this);
+                    addNoteDialogCallback.onClear(AddNoteDialog.this, extraData);
             }
         });
 
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addNoteDialogCallback != null) addNoteDialogCallback.onDone(AddNoteDialog.this);
+                if (addNoteDialogCallback != null) addNoteDialogCallback.onDone(AddNoteDialog.this, extraData);
             }
         });
         clear.setText(btn1);
@@ -56,8 +55,8 @@ public class AddNoteDialog extends FoodieHubDialog{
     }
 
     public interface AddNoteDialogCallback {
-        void onDone(AddNoteDialog addNoteDialog);
-        void onClear(AddNoteDialog addNoteDialog);
+        void onDone(AddNoteDialog addNoteDialog, Object object);
+        void onClear(AddNoteDialog addNoteDialog, Object object);
     }
 
     public BootstrapEditText getDialogText() {

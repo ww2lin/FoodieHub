@@ -23,7 +23,6 @@ public class FoodOrder extends FoodItem implements Parcelable {
     private String mDescription;
     @JsonProperty("price")
     private String mPrice;
-    private Long mQuantity = 1L;
 
     public FoodOrder(){}
 
@@ -55,10 +54,6 @@ public class FoodOrder extends FoodItem implements Parcelable {
         return mPrice;
     }
 
-    public Long getQuantity() {
-        return mQuantity;
-    }
-
     public String getDescription() {
         return mDescription;
     }
@@ -86,7 +81,6 @@ public class FoodOrder extends FoodItem implements Parcelable {
         dest.writeString(mImage);
         dest.writeString(mNote);
         dest.writeString(mPrice);
-        dest.writeLong(mQuantity);
         dest.writeString(mDescription);
     }
 
@@ -96,7 +90,6 @@ public class FoodOrder extends FoodItem implements Parcelable {
         mImage = in.readString();
         mNote = in.readString();
         mPrice = in.readString();
-        mQuantity = in.readLong();
         mDescription = in.readString();
     }
 

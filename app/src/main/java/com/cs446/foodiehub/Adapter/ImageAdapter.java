@@ -120,11 +120,11 @@ public class ImageAdapter extends BaseAdapter {
         });
     }
 
-    private void showDescription(View view, final String descprtion){
+    private void showDescription(View view, final String description){
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                DescriptionDialogFactory.buildNoteDialog(context, R.string.description, descprtion).show();
+                DescriptionDialogFactory.buildNoteDialog(context, R.string.description, description == null ? Util.getStringById(context, R.string.no_description) : description).show();
                 return true;
             }
         });

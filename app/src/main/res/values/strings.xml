@@ -58,4 +58,8 @@
 
     <!-- Noes-->
     <string name="pick_table_food">Please enter the table number and select at least one food from the menu.</string>
+    <string name="bad_connection">Something is wrong with the connection, order status not sent"</string>
+    <string name="order_sent">Order Completed!</string>
+    <string name="order_cancel">Order has been cancel!</string>
+    <string name="order_number">Order Number: </string>
 </resources>

@@ -55,9 +55,9 @@ public class OrderRequestFragment extends FoodieHubFragment {
 
                 orderHistoryAdapter = new FoodRequestAdapter(getActivity());
                 for (FoodOrderWrapper foodOrderWrapper : foodOrderWrappers){
-                    orderHistoryAdapter.addSectionHeaderItem(foodOrderWrapper.getRestaurant().getName(), foodOrderWrapper.getDate(), foodOrderWrapper.getTableNumber());
+                    orderHistoryAdapter.addSectionHeaderItem(foodOrderWrapper);
                     for (FoodOrder foodOrder : foodOrderWrapper.getFoodOrders()) {
-                        orderHistoryAdapter.addItem(foodOrder);
+                        orderHistoryAdapter.addItem(foodOrder, foodOrderWrapper.getOrderId());
                     }
                 }
 

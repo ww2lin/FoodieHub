@@ -37,6 +37,10 @@ public class Order {
         return id;
     }
 
+    public String getOrderId(){
+        return id;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

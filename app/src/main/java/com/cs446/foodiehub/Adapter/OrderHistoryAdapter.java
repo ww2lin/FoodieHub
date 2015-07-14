@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
 import com.cs446.foodiehub.R;
+import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.FoodSection;
 import com.cs446.foodiehub.model.MenuItem;
+import com.cs446.foodiehub.model.RecentOrder;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 
@@ -28,7 +30,8 @@ public class OrderHistoryAdapter extends FoodHeaderAdapter {
         TextView price;
         RobotoTextView description;
 
-        TextView section;
+        TextView restaurant;
+        TextView orderNumber;
         TextView date;
     }
 
@@ -37,8 +40,8 @@ public class OrderHistoryAdapter extends FoodHeaderAdapter {
         notifyDataSetChanged();
     }
 
-    public void addSectionHeaderItem(final String item, String date) {
-        mPastOrders.add(FoodSection.generateSectionMenu(item, date));
+    public void addSectionHeaderItem(RecentOrder recentOrder) {
+        mPastOrders.add(FoodSection.generateSectionMenu(recentOrder));
         notifyDataSetChanged();
     }
 
@@ -66,7 +69,8 @@ public class OrderHistoryAdapter extends FoodHeaderAdapter {
                 case TYPE_SEPARATOR:
                 default:
                     convertView = mInflater.inflate(R.layout.panel_order_history_section, null);
-                    viewHolder.section = (TextView) convertView.findViewById(R.id.textSeparator);
+                    viewHolder.restaurant = (TextView) convertView.findViewById(R.id.tv_restaurant);
+                    viewHolder.orderNumber = (TextView) convertView.findViewById(R.id.tv_order_number);
                     viewHolder.date = (TextView) convertView.findViewById(R.id.tv_date);
                     break;
             }
@@ -93,12 +97,12 @@ public class OrderHistoryAdapter extends FoodHeaderAdapter {
                 break;
             case TYPE_SEPARATOR:
             default:
-                viewHolder.section.setText(((FoodSection) mPastOrders.get(position)).getRestaurantTitle());
+                viewHolder.restaurant.setText(((FoodSection) mPastOrders.get(position)).getRestaurantTitle());
+                viewHolder.orderNumber.setText(Util.getStringById(context, R.string.order_number) + (mPastOrders.get(position)).getOrderId());
                 viewHolder.date.setText(((FoodSection) mPastOrders.get(position)).getDate());
                 break;
         }
         return convertView;
     }
-
 
 }

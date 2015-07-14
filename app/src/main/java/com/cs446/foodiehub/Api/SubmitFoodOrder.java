@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Created by Alex on 15-07-12.
  */
 public class SubmitFoodOrder extends HttpClient {
-    private static String endpoint = "api/order";
+    private static final String endpoint = "api/order";
 
     public static void submitOrder(String resturantId, String tableId, JSONArray order, ServerResponse serverResponse){
         try {

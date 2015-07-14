@@ -9,7 +9,7 @@
     android:padding="@dimen/standard_gap_size">
 
     <TextView
-        android:id="@+id/textSeparator"
+        android:id="@+id/tv_table_number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
@@ -18,6 +18,17 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFF"
         android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_order_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:padding="@dimen/standard_small_gap_size"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFF"
         android:visibility="visible" />
 
     <RelativeLayout

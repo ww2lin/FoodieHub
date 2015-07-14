@@ -13,17 +13,23 @@ public class FoodSection extends FoodItem {
 
     private String date;
 
-    public static FoodSection generateSectionMenu(String restaurantTitle, String date, String table){
+    public static FoodSection generateSectionMenu(FoodOrderWrapper foodOrderWrapper){
         FoodSection foodSection = new FoodSection();
         foodSection.isSection = true;
-        foodSection.restaurantTitle = restaurantTitle;
-        foodSection.date = date;
-        foodSection.table = table;
+        foodSection.restaurantTitle = foodOrderWrapper.getRestaurant().getName();
+        foodSection.date = foodOrderWrapper.getDate();
+        foodSection.table = foodOrderWrapper.getTableNumber();
+        foodSection.orderId = foodOrderWrapper.getOrderId();
         return foodSection;
     }
 
-    public static FoodSection generateSectionMenu(String restaurantTitle, String date){
-        return generateSectionMenu(restaurantTitle, date, null);
+    public static FoodSection generateSectionMenu(RecentOrder recentOrder){
+        FoodSection foodSection = new FoodSection();
+        foodSection.isSection = true;
+        foodSection.restaurantTitle = recentOrder.getRestaurant().getName();
+        foodSection.date = recentOrder.getDate();
+        foodSection.orderId = recentOrder.getOrderId();
+        return foodSection;
     }
 
     public FoodSection(){}
@@ -42,5 +48,9 @@ public class FoodSection extends FoodItem {
 
     public String getTable() {
         return table;
+    }
+
+    public String getOrderId() {
+        return orderId;
     }
 }
