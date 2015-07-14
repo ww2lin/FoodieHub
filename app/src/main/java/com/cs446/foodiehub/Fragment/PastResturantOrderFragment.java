@@ -59,7 +59,7 @@ public class PastResturantOrderFragment extends FoodieHubFragment {
                 ArrayList<RecentOrder> recentOrders = Util.getMapper().readValue(responseString, new TypeReference<ArrayList<RecentOrder>>() {
                 });
 
-                ArrayList<MenuItem> menuItems = new ArrayList<>(recentOrders.size());
+                    ArrayList<MenuItem> menuItems = new ArrayList<>(recentOrders.size());
                 for (RecentOrder recentOrder : recentOrders){
                     menuItems.addAll(recentOrder.getMenuItems());
                 }

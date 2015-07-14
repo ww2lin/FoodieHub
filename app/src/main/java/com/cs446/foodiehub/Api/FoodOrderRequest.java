@@ -2,6 +2,7 @@ package com.cs446.foodiehub.Api;
 
 import com.cs446.foodiehub.Api.Http.HttpClient;
 import com.cs446.foodiehub.Interface.ServerResponse;
+import com.cs446.foodiehub.model.FoodStatus;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -18,6 +19,7 @@ public class FoodOrderRequest extends HttpClient {
     public static void getRestaurantOrders(String resturantId, ServerResponse serverResponse) {
         RequestParams data = new RequestParams();
         data.put("restaurantid", resturantId);
+        data.put("status-filter", FoodStatus.PROGRESS.getName());
         ExecuteGetRequest(recentOrderEndpoint, data, serverResponse);
     }
 

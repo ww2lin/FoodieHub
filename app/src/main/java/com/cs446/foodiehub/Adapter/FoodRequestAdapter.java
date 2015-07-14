@@ -113,12 +113,11 @@ public class FoodRequestAdapter extends FoodHeaderAdapter {
                 viewHolder.submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FoodOrderRequest.orderCancel(mPastOrders.get(position).getOrderId(), new ServerResponse() {
+                        FoodOrderRequest.orderCompleted(mPastOrders.get(position).getOrderId(), new ServerResponse() {
                             @Override
                             public void onSuccess(int statusCode, String responseString) {
                                 deleteOrder(mPastOrders.get(position).getOrderId());
                                 Toast.makeText(context, Util.getStringById(context, R.string.order_sent), Toast.LENGTH_SHORT).show();
-
                             }
 
                             @Override
