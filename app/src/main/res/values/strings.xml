@@ -6,7 +6,8 @@
     <string name="submit">Submit</string>
     <string name="recent_order">Recent Order</string>
     <string name="clear">Clear</string>
-    <string name="close">close</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
     <string name="done">Done!</string>
 
     <!--Fragments from the drawer-->
@@ -22,10 +23,11 @@
     <!-- MenuGalleryFragment-->
 
     <string name="table_number">Table Number</string>
-
+    <string name="table_order">Table Number: </string>
     <!-- CheckoutFragment-->
     <string name="food">Food</string>
     <string name="notes">Notes</string>
+    <string name="no_note">No Note</string>
     <string name="total">Total</string>
 
     <!-- AboutMeFragment -->
@@ -37,6 +39,8 @@
     <!-- hints -->
     <string name="add_note">Add note</string>
     <string name="description">Description</string>
+    <string name="missing_information">Missing Information</string>
+    <string name="cancel_order">Order Cancel</string>
     <string name="no_description">There does not seem to be a description for this food :(</string>
     <string name="click_add_note">Click here to add notes!</string>
 
@@ -52,5 +56,6 @@
 
     <string name="login_fail">Login fail</string>
 
-
+    <!-- Noes-->
+    <string name="pick_table_food">Please enter the table number and select at least one food from the menu.</string>
 </resources>

@@ -73,7 +73,7 @@ public class PastOrderAdapter extends BaseAdapter {
         viewHolder.description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DescriptionDialogFactory.build(context, R.string.description, viewHolder.description.getText().toString()).show();
+                DescriptionDialogFactory.buildNoteDialog(context, R.string.description, viewHolder.description.getText().toString()).show();
             }
         });
         return convertView;

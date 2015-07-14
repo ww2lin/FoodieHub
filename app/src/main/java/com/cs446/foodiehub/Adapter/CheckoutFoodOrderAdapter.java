@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 15-06-11.
  */
-public class FoodOrderAdapter extends BaseAdapter {
+public class CheckoutFoodOrderAdapter extends BaseAdapter {
     private Context context;
     private final ArrayList<FoodOrder> mFoodOrders;
     private RequestManager mGlide;
@@ -35,7 +35,7 @@ public class FoodOrderAdapter extends BaseAdapter {
         TextView price;
     }
 
-    public FoodOrderAdapter(Context context, ArrayList<FoodOrder> foodOrders) {
+    public CheckoutFoodOrderAdapter(Context context, ArrayList<FoodOrder> foodOrders) {
         this.context = context;
         this.mFoodOrders = foodOrders;
         this.mGlide = Glide.with(context);
@@ -68,7 +68,7 @@ public class FoodOrderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        mGlide.load(foodOrder.getUrl()).centerCrop().into(viewHolder.imageView);
+        mGlide.load(foodOrder.getImage()).centerCrop().into(viewHolder.imageView);
         viewHolder.price.setText(foodOrder.getPrice());
         viewHolder.addNote.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -99,7 +99,7 @@ public class FoodOrderAdapter extends BaseAdapter {
     }
 
     private void addNote(final FoodOrder foodOrder, final BootstrapEditText textView) {
-        new AddNoteDialog(context, Util.getStringById(context, R.string.add_note), textView.getText().toString(), new AddNoteDialog.AddNoteDialogCallback() {
+        new AddNoteDialog(context, Util.getStringById(context, R.string.add_note), Util.getStringById(context, R.string.clear), Util.getStringById(context, R.string.done), textView.getText().toString(), new AddNoteDialog.AddNoteDialogCallback() {
             @Override
             public void onDone(AddNoteDialog addNoteDialog) {
                 foodOrder.setNote(addNoteDialog.getDialogText().getText().toString());
@@ -118,7 +118,7 @@ public class FoodOrderAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DescriptionDialogFactory.build(context, R.string.description, descprtion).show();
+                DescriptionDialogFactory.buildNoteDialog(context, R.string.description, descprtion).show();
             }
         });
     }

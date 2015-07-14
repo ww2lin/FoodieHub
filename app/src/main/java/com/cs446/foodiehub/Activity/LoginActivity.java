@@ -35,8 +35,8 @@ public class LoginActivity extends Activity{
 
         progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
 
-        etUserName.setText("test@test.com");
-        etPassword.setText("test");
+        etUserName.setText("test4@test.com");
+        etPassword.setText("Test");
         setupEventListener();
     }
 

@@ -12,12 +12,14 @@ import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.NavigationItem;
 
+import java.util.List;
+
 /**
  * Created by Alex on 15-06-09.
  */
 public class NavigationAdapter extends BaseAdapter {
 
-    NavigationItem[] mFragmentTypes;
+    List<NavigationItem> mFragmentTypes;
     Context context;
     // View lookup cache
     private static class ViewHolder {
@@ -25,7 +27,7 @@ public class NavigationAdapter extends BaseAdapter {
         ImageView icon;
     }
 
-    public NavigationAdapter(Context context, NavigationItem[] mFragmentTypes) {
+    public NavigationAdapter(Context context, List<NavigationItem> mFragmentTypes) {
         this.mFragmentTypes = mFragmentTypes;
         this.context = context;
     }
@@ -53,12 +55,12 @@ public class NavigationAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mFragmentTypes.length;
+        return mFragmentTypes.size();
     }
 
     @Override
     public NavigationItem getItem(int position) {
-        return mFragmentTypes[position];
+        return mFragmentTypes.get(position);
     }
 
     @Override

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#2F2F2F"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="@dimen/standard_gap_size">
+
+    <TextView
+        android:id="@+id/textSeparator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:padding="@dimen/standard_small_gap_size"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end">
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/standard_gap_size"
+            android:paddingStart="@dimen/standard_gap_size"
+            android:layout_toStartOf="@id/btn_submit"
+            android:text="@string/cancel"
+            bootstrap:bb_roundedCorners="true"
+            bootstrap:bb_type="danger"
+            />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="@dimen/standard_gap_size"
+            android:paddingStart="@dimen/standard_gap_size"
+            android:text="@string/done"
+            bootstrap:bb_roundedCorners="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFF"
+        android:visibility="visible" />
+
+</LinearLayout>

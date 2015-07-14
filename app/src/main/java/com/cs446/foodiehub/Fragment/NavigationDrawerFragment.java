@@ -109,14 +109,17 @@ public class NavigationDrawerFragment extends Fragment {
 
         List<NavigationItem> navigationItems = new ArrayList<>();
         if (LoginRequest.isOwner()){
-//            navigationItems.add
+            navigationItems.add(new NavigationItem(FragmentType.ORDER_REQUESTS, R.drawable.food_order));
         }
+
+        navigationItems.add(new NavigationItem(FragmentType.RESTAURANT, R.drawable.restaurant));
+        navigationItems.add(new NavigationItem(FragmentType.ORDER_HISTORY, R.drawable.list));
+        navigationItems.add(new NavigationItem(FragmentType.ABOUT_ME, R.drawable.profile));
+
         mNavigationAdapter = new NavigationAdapter(
                 getActionBar().getThemedContext(),
-                new NavigationItem[]{ new NavigationItem(FragmentType.RESTAURANT, R.drawable.restaurant),
-                        new NavigationItem(FragmentType.ORDER_HISTORY, R.drawable.list),
-                        new NavigationItem(FragmentType.ABOUT_ME, R.drawable.profile)
-                });
+                navigationItems);
+
         mDrawerListView.setAdapter(mNavigationAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

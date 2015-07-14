@@ -1,37 +1,26 @@
 package com.cs446.foodiehub.Adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.model.FoodSection;
-import com.cs446.foodiehub.model.FoodItem;
 import com.cs446.foodiehub.model.MenuItem;
 import com.devspark.robototextview.widget.RobotoTextView;
 
-import java.util.ArrayList;
 
 /**
  * Created by Alex on 15-07-13.
  */
-public class OrderHistoryAdapter extends BaseAdapter {
+public class OrderHistoryAdapter extends FoodHeaderAdapter {
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_SEPARATOR = 1;
-
-    private ArrayList<FoodItem> mPastOrders = new ArrayList<>();
-    private Context context;
-    private RequestManager mGlide;
-
-    private LayoutInflater mInflater;
+    public OrderHistoryAdapter(Context context){
+        super(context);
+    }
 
     private static class ViewHolder {
         TextView name;
@@ -41,14 +30,6 @@ public class OrderHistoryAdapter extends BaseAdapter {
 
         TextView section;
         TextView date;
-    }
-
-    public OrderHistoryAdapter(Context context) {
-        this.context = context;
-        this.mPastOrders = new ArrayList<>();
-        mGlide = Glide.with(context);
-        mInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public void addItem(final MenuItem item) {
@@ -105,43 +86,19 @@ public class OrderHistoryAdapter extends BaseAdapter {
                 viewHolder.description.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DescriptionDialogFactory.build(context, R.string.description, viewHolder.description.getText().toString()).show();
+                        DescriptionDialogFactory.buildNoteDialog(context, R.string.description, viewHolder.description.getText().toString()).show();
                     }
                 });
 
                 break;
             case TYPE_SEPARATOR:
             default:
-                viewHolder.section.setText(((FoodSection)mPastOrders.get(position)).getRestaurantTitle());
-                viewHolder.date.setText(((FoodSection)mPastOrders.get(position)).getDate());
+                viewHolder.section.setText(((FoodSection) mPastOrders.get(position)).getRestaurantTitle());
+                viewHolder.date.setText(((FoodSection) mPastOrders.get(position)).getDate());
                 break;
         }
         return convertView;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return mPastOrders.get(position) instanceof FoodSection ? TYPE_SEPARATOR : TYPE_ITEM;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
-    @Override
-    public int getCount() {
-        return mPastOrders.size();
-    }
-
-    @Override
-    public FoodItem getItem(int position) {
-        return mPastOrders.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
 
 }

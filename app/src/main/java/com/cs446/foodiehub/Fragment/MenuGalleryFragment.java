@@ -13,6 +13,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.Api.MenuRequest;
+import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
@@ -60,17 +61,18 @@ public class MenuGalleryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String tableId = tableNumber.getEditableText().toString();
-                if (tableId != null && tableId.trim().length() > 0 ) {
+
+                ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
+                for (MenuItem menuItem : mImageAdapter.getMenu()) {
+                    if (menuItem.isChecked()) {
+                        selectedFood.add(new FoodOrder(menuItem.getName(), menuItem.getServerId(), menuItem.getImage(), menuItem.getPrice(), menuItem.getDescription()));
+                        mTotalPrice += Double.parseDouble(menuItem.getPrice());
+                    }
+                }
+                if (tableId != null && tableId.trim().length() > 0 && selectedFood.size() > 0) {
                     // Since mMenu was passed by reference into the adapter
                     // thus we just fetch the "MenuItem.checked" field inside mMenu
                     // for all the photos;
-                    ArrayList<FoodOrder> selectedFood = new ArrayList<FoodOrder>();
-                    for (MenuItem menuItem : mImageAdapter.getMenu()) {
-                        if (menuItem.isChecked()) {
-                            selectedFood.add(new FoodOrder(menuItem.getName(), menuItem.getServerId(), menuItem.getImage(), menuItem.getPrice(), menuItem.getDescription()));
-                            mTotalPrice += Double.parseDouble(menuItem.getPrice());
-                        }
-                    }
                     // Open the checkout page
                     Fragment mFragment = new CheckoutFragment();
                     Bundle bundle = new Bundle();
@@ -84,6 +86,8 @@ public class MenuGalleryFragment extends Fragment {
                     ft.replace(R.id.container, mFragment);
                     ft.addToBackStack(null);
                     ft.commit();
+                } else {
+                    DescriptionDialogFactory.buildNoteDialog(getActivity(), R.string.missing_information, R.string.pick_table_food).show();
                 }
             }
         });
@@ -136,15 +140,15 @@ public class MenuGalleryFragment extends Fragment {
         return bundle.getParcelableArrayList(EXTRA_FOOD_ORDER);
     }
 
-    public static Double getTotalPrice(Bundle bundle){
+    public static Double getTotalPrice(Bundle bundle) {
         return bundle.getDouble(EXTRA_TOTAL_PRICE);
     }
 
-    public static String getRestrauntId(Bundle bundle){
+    public static String getRestrauntId(Bundle bundle) {
         return bundle.getString(EXTRA_RESTURANT_ID);
     }
 
-    public static String getTableId(Bundle bundle){
+    public static String getTableId(Bundle bundle) {
         return bundle.getString(EXTRA_TABLE_ID);
     }
 

@@ -124,7 +124,7 @@ public class ImageAdapter extends BaseAdapter {
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                DescriptionDialogFactory.build(context, R.string.description , descprtion).show();
+                DescriptionDialogFactory.buildNoteDialog(context, R.string.description, descprtion).show();
                 return true;
             }
         });

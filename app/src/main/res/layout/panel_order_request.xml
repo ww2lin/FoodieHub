@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:padding="@dimen/standard_small_gap_size">
 
-
     <RelativeLayout
         android:id="@+id/photo"
         android:layout_width="wrap_content"
@@ -29,23 +28,17 @@
     </RelativeLayout>
 
     <com.devspark.robototextview.widget.RobotoTextView
-        android:id="@+id/tv_description"
+        android:id="@+id/tv_note"
         android:layout_width="0dp"
         android:layout_height="@dimen/menu_image_size"
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:padding="@dimen/standard_small_gap_size"
         android:paddingTop="@dimen/standard_large_gap_size"
-        android:hint="@string/no_description"
+        android:hint="@string/no_note"
         app:fontFamily="roboto"
         android:ellipsize="end"
         android:maxLines="4"
         app:typeface="roboto_light_italic" />
-
-    <TextView
-        android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" />
 
 </LinearLayout>

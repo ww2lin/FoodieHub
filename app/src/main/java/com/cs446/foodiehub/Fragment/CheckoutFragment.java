@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cs446.foodiehub.Adapter.FoodOrderAdapter;
+import com.cs446.foodiehub.Adapter.CheckoutFoodOrderAdapter;
 import com.cs446.foodiehub.Api.SubmitFoodOrder;
 import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class CheckoutFragment extends MenuFoodieHubFragment {
 
     private ArrayList<FoodOrder> mFoodOrders;
-    private FoodOrderAdapter mFoodOrderAdapter;
+    private CheckoutFoodOrderAdapter mCheckoutFoodOrderAdapter;
     private String mTableId;
     private String mResturantid;
     private ListView mListView;
@@ -44,9 +44,9 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
 
         mListView = (ListView) rootView.findViewById(R.id.lv_orders);
 
-        mFoodOrderAdapter = new FoodOrderAdapter(getActivity(), mFoodOrders);
+        mCheckoutFoodOrderAdapter = new CheckoutFoodOrderAdapter(getActivity(), mFoodOrders);
 
-        mListView.setAdapter(mFoodOrderAdapter);
+        mListView.setAdapter(mCheckoutFoodOrderAdapter);
 
         //getActivity().getMenuInflater().inflate(R.menu.fragment_checkout,);
 

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import com.cs446.foodiehub.Fragment.AboutMeFragment;
 import com.cs446.foodiehub.Fragment.FragmentType;
 import com.cs446.foodiehub.Fragment.OrderHistoryFragment;
+import com.cs446.foodiehub.Fragment.OrderRequestFragment;
 import com.cs446.foodiehub.Fragment.RestaurantFragment;
 
 /**
@@ -23,6 +24,9 @@ public class FragmentTypeFactory {
                     break;
                 case ORDER_HISTORY:
                     result = new OrderHistoryFragment();
+                    break;
+                case ORDER_REQUESTS:
+                    result = new OrderRequestFragment();
                     break;
                 case RESTAURANT:
                 default :

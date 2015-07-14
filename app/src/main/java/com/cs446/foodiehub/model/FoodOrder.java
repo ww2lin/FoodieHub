@@ -3,22 +3,34 @@ package com.cs446.foodiehub.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Alex on 15-06-11.
  */
-public class FoodOrder implements Parcelable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FoodOrder extends FoodItem implements Parcelable {
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("_id")
     private String mServerId;
-    private String mUrl;
+    @JsonProperty("picture")
+    private String mImage;
+    @JsonProperty("note")
     private String mNote;
+    @JsonProperty("description")
     private String mDescription;
+    @JsonProperty("price")
     private String mPrice;
     private Long mQuantity = 1L;
 
-    public FoodOrder(String name, String serverId, String url, String price, String description) {
+    public FoodOrder(){}
+
+    public FoodOrder(String name, String serverId, String image, String price, String description) {
         this.name = name;
         this.mServerId = serverId;
-        this.mUrl = url;
+        this.mImage = image;
         this.mPrice = price;
         this.mDescription = description;
     }
@@ -27,8 +39,8 @@ public class FoodOrder implements Parcelable {
         return mServerId;
     }
 
-    public String getUrl() {
-        return mUrl;
+    public String getImage() {
+        return mImage;
     }
 
     public String getNote() {
@@ -71,7 +83,7 @@ public class FoodOrder implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(mServerId);
-        dest.writeString(mUrl);
+        dest.writeString(mImage);
         dest.writeString(mNote);
         dest.writeString(mPrice);
         dest.writeLong(mQuantity);
@@ -81,7 +93,7 @@ public class FoodOrder implements Parcelable {
     public void readFromParcel(Parcel in) {
         name = in.readString();
         mServerId = in.readString();
-        mUrl = in.readString();
+        mImage = in.readString();
         mNote = in.readString();
         mPrice = in.readString();
         mQuantity = in.readLong();

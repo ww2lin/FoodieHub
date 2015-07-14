@@ -6,17 +6,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 /**
- * Created by Alex on 15-07-12.
+ * Created by Alex on 15-07-14.
  */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RecentOrder extends com.cs446.foodiehub.model.Order {
+public class FoodOrderWrapper extends com.cs446.foodiehub.model.Order {
     @JsonProperty("items")
-    ArrayList<MenuItem> menuItems;
+    ArrayList<FoodOrder> foodOrders;
 
-    public RecentOrder(){}
+    public FoodOrderWrapper(){}
 
-    public ArrayList<MenuItem> getMenuItems() {
-        return menuItems;
+    public ArrayList<FoodOrder> getFoodOrders() {
+        return foodOrders;
     }
-
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
  * Created by Alex on 15-06-09.
  */
 public enum FragmentType {
+    ORDER_REQUESTS("Order Requests"),
     RESTAURANT("Restaurants"),
     ORDER_HISTORY("Order History"),
     ABOUT_ME("About Me");
