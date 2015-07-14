@@ -3,6 +3,7 @@ package com.cs446.foodiehub.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by Alex on 15-06-10.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MenuItem implements Parcelable {
+public class MenuItem extends FoodItem implements Parcelable {
     private String mId;
     @JsonProperty("name")
     private String mName;
@@ -25,6 +26,7 @@ public class MenuItem implements Parcelable {
     @JsonProperty("_id")
     private String mServerId;
 
+    @JsonIgnore
     private boolean checked;
 
     public MenuItem() {

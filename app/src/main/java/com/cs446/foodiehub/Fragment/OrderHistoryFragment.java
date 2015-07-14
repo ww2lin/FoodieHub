@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.cs446.foodiehub.Adapter.PastOrderAdapter;
-import com.cs446.foodiehub.Api.RecentOrderRequest;
+import com.cs446.foodiehub.Adapter.OrderHistoryAdapter;
+import com.cs446.foodiehub.Api.SubmitFoodOrder;
 import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
@@ -24,10 +25,7 @@ import java.util.ArrayList;
 public class OrderHistoryFragment extends FoodieHubFragment {
 
     private ListView mListView;
-    private PastOrderAdapter mRestaurants;
-    private String mSelectedRestaurantId;
-
-    private static final String EXTRA_SELECTED_RESTAURANT = "extra_selected_restaurant";
+    private OrderHistoryAdapter orderHistoryAdapter;
 
     public OrderHistoryFragment() {
     }
@@ -36,20 +34,14 @@ public class OrderHistoryFragment extends FoodieHubFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_past_order, container, false);
-
-        String resturantId = MenuGalleryFragment.getRestrauntId(getArguments());
+        View rootView = inflater.inflate(R.layout.fragment_order_history, container, false);
 
         // Fetch the list of restaurants
-        RecentOrderRequest.getRecentOrder(resturantId, mServerResponse);
+        SubmitFoodOrder.getPastOrders(mServerResponse);
 
-        mListView = (ListView) rootView.findViewById(R.id.lv_past_order);
+        mListView = (ListView) rootView.findViewById(R.id.lv_order_history);
 
         return rootView;
-    }
-
-    public static String getMenu(Bundle bundle) {
-        return bundle.getString(EXTRA_SELECTED_RESTAURANT);
     }
 
     private ServerResponse mServerResponse = new ServerResponse() {
@@ -59,13 +51,15 @@ public class OrderHistoryFragment extends FoodieHubFragment {
                 ArrayList<RecentOrder> recentOrders = Util.getMapper().readValue(responseString, new TypeReference<ArrayList<RecentOrder>>() {
                 });
 
-                ArrayList<MenuItem> menuItems = new ArrayList<>(recentOrders.size());
+                orderHistoryAdapter = new OrderHistoryAdapter(getActivity());
                 for (RecentOrder recentOrder : recentOrders){
-                    menuItems.addAll(recentOrder.getMenuItems());
-                    recentOrder.getMenuItems().get(0).setmDescription("This is a REALLLLLY Longggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg string gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
+                    orderHistoryAdapter.addSectionHeaderItem(recentOrder.getRestaurant().getName(), recentOrder.getDate());
+                    for (MenuItem menuItem : recentOrder.getMenuItems()) {
+                        orderHistoryAdapter.addItem(menuItem);
+                    }
                 }
-                mRestaurants = new PastOrderAdapter(getActivity(), menuItems);
-                mListView.setAdapter(mRestaurants);
+
+                mListView.setAdapter(orderHistoryAdapter);
             } catch (Exception e){
 
             }
@@ -73,6 +67,7 @@ public class OrderHistoryFragment extends FoodieHubFragment {
 
         @Override
         public void onFailure(int statusCode, String responseString) {
+            Toast.makeText(getActivity(), "fail: "+responseString, Toast.LENGTH_SHORT).show();
         }
     };
 }

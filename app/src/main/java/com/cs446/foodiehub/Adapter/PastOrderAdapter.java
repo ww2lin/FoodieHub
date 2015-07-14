@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class PastOrderAdapter extends BaseAdapter {
     private Context context;
-    private final ArrayList<MenuItem> menuItems;
+    protected final ArrayList<MenuItem> menuItems;
     private RequestManager mGlide;
 
     private static class ViewHolder {

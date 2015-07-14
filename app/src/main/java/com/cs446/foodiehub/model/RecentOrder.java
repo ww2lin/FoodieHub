@@ -18,8 +18,6 @@ public class RecentOrder {
     String total;
     @JsonProperty("subtotal")
     String subTotal;
-    @JsonProperty("resturantid")
-    String resturantId;
     @JsonProperty("tablenumber")
     String tableNumber;
     @JsonProperty("tax")
@@ -31,6 +29,9 @@ public class RecentOrder {
 
     @JsonProperty("items")
     ArrayList<MenuItem> menuItems;
+
+    @JsonProperty("restaurant")
+    Restaurant restaurant;
 
     public RecentOrder(){}
 
@@ -64,14 +65,6 @@ public class RecentOrder {
 
     public void setSubTotal(String subTotal) {
         this.subTotal = subTotal;
-    }
-
-    public String getResturantId() {
-        return resturantId;
-    }
-
-    public void setResturantId(String resturantId) {
-        this.resturantId = resturantId;
     }
 
     public String getTableNumber() {
@@ -112,5 +105,9 @@ public class RecentOrder {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 }
