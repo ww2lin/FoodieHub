@@ -60,4 +60,9 @@ public class AboutMeFragment extends FoodieHubFragment {
             // redirect to login screen if this happens.
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.ABOUT_ME.getName();
+    }
 }

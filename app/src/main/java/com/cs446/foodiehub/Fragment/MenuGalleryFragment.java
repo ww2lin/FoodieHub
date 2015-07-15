@@ -14,6 +14,7 @@ import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Adapter.ImageAdapter;
 import com.cs446.foodiehub.Api.MenuRequest;
 import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
+import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by Alex on 15-06-10.
  */
-public class MenuGalleryFragment extends Fragment {
+public class MenuGalleryFragment extends FoodieHubFragment {
 
     private GridView gridView;
     private ImageAdapter mImageAdapter;
@@ -175,4 +176,9 @@ public class MenuGalleryFragment extends Fragment {
             Toast.makeText(getActivity(), "error while getting menu", Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.RESTAURANT.getName();
+    }
 }

@@ -74,4 +74,9 @@ public class PastResturantOrderFragment extends FoodieHubFragment {
         public void onFailure(int statusCode, String responseString) {
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.RESTAURANT.getName();
+    }
 }

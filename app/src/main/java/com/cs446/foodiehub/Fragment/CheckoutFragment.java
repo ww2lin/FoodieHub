@@ -96,4 +96,9 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
             Toast.makeText(getActivity(), "fail: "+responseString , Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.RESTAURANT.getName();
+    }
 }

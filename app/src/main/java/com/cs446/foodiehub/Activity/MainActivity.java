@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cs446.foodiehub.Factory.FragmentTypeFactory;
-import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Fragment.FragmentType;
-import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.Fragment.NavigationDrawerFragment;
 import com.cs446.foodiehub.Fragment.RestaurantFragment;
+import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
+import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.R;
 
 import java.util.List;
@@ -26,12 +25,6 @@ public class MainActivity extends FoodieHubActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +51,7 @@ public class MainActivity extends FoodieHubActivity
     public void onNavigationDrawerItemSelected(int position, FragmentType menuItem) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment displayFragment = FragmentTypeFactory.getFramgnet(fragmentManager, menuItem);
+        FoodieHubFragment displayFragment = FragmentTypeFactory.getFramgnet(fragmentManager, menuItem);
 
         // if the display fragment is null -- no implement has been made yet
         if (displayFragment != null) {
@@ -69,14 +62,6 @@ public class MainActivity extends FoodieHubActivity
                     .commit();
         }
     }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,6 +114,5 @@ public class MainActivity extends FoodieHubActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

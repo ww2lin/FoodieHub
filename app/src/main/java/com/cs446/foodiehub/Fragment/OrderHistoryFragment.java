@@ -70,4 +70,9 @@ public class OrderHistoryFragment extends FoodieHubFragment {
             Toast.makeText(getActivity(), "fail: "+responseString, Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.ORDER_HISTORY.getName();
+    }
 }

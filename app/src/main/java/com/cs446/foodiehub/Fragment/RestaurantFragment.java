@@ -47,6 +47,7 @@ public class RestaurantFragment extends FoodieHubFragment {
         mListView = (ListView) rootView.findViewById(R.id.lv_restaurants);
 
         mListView.setOnItemClickListener(onItemClickListener);
+
         return rootView;
     }
 
@@ -88,4 +89,9 @@ public class RestaurantFragment extends FoodieHubFragment {
             Toast.makeText(RestaurantFragment.this.getActivity(), "Something unexpected happend!", Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected String getTitle() {
+        return FragmentType.RESTAURANT.getName();
+    }
 }
