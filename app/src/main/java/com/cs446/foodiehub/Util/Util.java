@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
-import com.cs446.foodiehub.model.AboutMe;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 

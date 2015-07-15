@@ -16,7 +16,7 @@ import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
-import com.cs446.foodiehub.model.Restaurant;
+import com.cs446.foodiehub.model.server.Restaurant;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.ArrayList;

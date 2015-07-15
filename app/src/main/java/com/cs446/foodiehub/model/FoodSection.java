@@ -1,5 +1,8 @@
 package com.cs446.foodiehub.model;
 
+import com.cs446.foodiehub.model.server.FoodOrderWrapper;
+import com.cs446.foodiehub.model.server.RecentOrder;
+
 /**
  * Created by Alex on 15-07-13.
  */

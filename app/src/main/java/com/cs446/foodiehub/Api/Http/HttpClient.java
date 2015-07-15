@@ -3,6 +3,7 @@ package com.cs446.foodiehub.Api.Http;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -16,6 +17,8 @@ public class HttpClient {
     private static final String hostUrl = "http://104.236.250.210:8000/";
 
     private static AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
+    private static SyncHttpClient sclient = new SyncHttpClient(true, 80, 443);
+
     private static String KEY_BEARER = "Bearer";
     private static String  KEY_AUTHORIZATION = "Authorization";
 
@@ -32,6 +35,10 @@ public class HttpClient {
 
     protected static void ExecutePostRequest(String url, RequestParams params, final ServerResponse serverResponse) {
         client.post(hostUrl + url, params, executeRequest(serverResponse));
+    }
+
+    protected static void ExecuteThreadSafePostRequest(String url, RequestParams params, final ServerResponse serverResponse) {
+        sclient.post(hostUrl + url, params, executeRequest(serverResponse));
     }
 
     protected static void ExecuteJsonPostRequest(String url, JSONObject jsonObject, final ServerResponse serverResponse) throws Exception {
@@ -54,6 +61,7 @@ public class HttpClient {
 
     protected static void setToken(String token){
         client.addHeader(KEY_AUTHORIZATION, KEY_BEARER+" "+token);
+        sclient.addHeader(KEY_AUTHORIZATION, KEY_BEARER+" "+token);
     }
 
 }

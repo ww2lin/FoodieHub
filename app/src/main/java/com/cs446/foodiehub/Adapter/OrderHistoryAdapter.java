@@ -10,8 +10,8 @@ import com.cs446.foodiehub.Factory.DescriptionDialogFactory;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.model.FoodSection;
-import com.cs446.foodiehub.model.MenuItem;
-import com.cs446.foodiehub.model.RecentOrder;
+import com.cs446.foodiehub.model.server.MenuItem;
+import com.cs446.foodiehub.model.server.RecentOrder;
 import com.devspark.robototextview.widget.RobotoTextView;
 
 

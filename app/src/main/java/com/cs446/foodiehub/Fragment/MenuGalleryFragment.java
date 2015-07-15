@@ -18,8 +18,8 @@ import com.cs446.foodiehub.Fragment.base.FoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
-import com.cs446.foodiehub.model.FoodOrder;
-import com.cs446.foodiehub.model.MenuItem;
+import com.cs446.foodiehub.model.server.FoodOrder;
+import com.cs446.foodiehub.model.server.MenuItem;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.json.JSONObject;

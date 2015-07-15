@@ -1,4 +1,4 @@
-package com.cs446.foodiehub.model;
+package com.cs446.foodiehub.model.server;
 
 import com.cs446.foodiehub.model.base.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

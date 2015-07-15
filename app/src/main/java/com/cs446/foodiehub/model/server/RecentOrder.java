@@ -1,5 +1,6 @@
-package com.cs446.foodiehub.model;
+package com.cs446.foodiehub.model.server;
 
+import com.cs446.foodiehub.model.server.MenuItem;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

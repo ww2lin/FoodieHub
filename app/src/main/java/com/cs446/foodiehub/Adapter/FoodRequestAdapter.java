@@ -15,8 +15,8 @@ import com.cs446.foodiehub.R;
 import com.cs446.foodiehub.Util.Util;
 import com.cs446.foodiehub.dialog.AddNoteDialog;
 import com.cs446.foodiehub.model.FoodItem;
-import com.cs446.foodiehub.model.FoodOrder;
-import com.cs446.foodiehub.model.FoodOrderWrapper;
+import com.cs446.foodiehub.model.server.FoodOrder;
+import com.cs446.foodiehub.model.server.FoodOrderWrapper;
 import com.cs446.foodiehub.model.FoodSection;
 import com.devspark.robototextview.widget.RobotoTextView;
 

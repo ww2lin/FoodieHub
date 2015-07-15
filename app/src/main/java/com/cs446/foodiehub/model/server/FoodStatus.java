@@ -1,4 +1,4 @@
-package com.cs446.foodiehub.model;
+package com.cs446.foodiehub.model.server;
 
 /**
  * Created by Alex on 15-07-14.

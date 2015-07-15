@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.cs446.foodiehub.R;
-import com.cs446.foodiehub.model.Restaurant;
+import com.cs446.foodiehub.model.server.Restaurant;
 
 import java.util.ArrayList;
 

@@ -62,4 +62,12 @@
     <string name="order_sent">Order Completed!</string>
     <string name="order_cancel">Order has been cancel!</string>
     <string name="order_number">Order Number: </string>
+
+    <string name="total_cost_with_tax">Total Cost with Tax: </string>
+
+    <string name="order_ready">Your order is ready.</string>
+    <string name="order_canceled">Your order has been cancel.</string>
+
+
+    <string name="order_progress">Your order is in progress.</string>
 </resources>

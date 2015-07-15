@@ -27,7 +27,5 @@ public abstract class FoodieHubFragment extends Fragment {
         // Set title
         ((FoodieHubActivity)getActivity()).setActionBarTitle(getTitle());
     }
-
-
     protected abstract String getTitle();
 }

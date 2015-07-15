@@ -16,10 +16,14 @@ import com.cs446.foodiehub.Api.SubmitFoodOrder;
 import com.cs446.foodiehub.Fragment.base.MenuFoodieHubFragment;
 import com.cs446.foodiehub.Interface.ServerResponse;
 import com.cs446.foodiehub.R;
-import com.cs446.foodiehub.model.FoodOrder;
+import com.cs446.foodiehub.Thread.FoodStatusThread;
+import com.cs446.foodiehub.Util.Util;
+import com.cs446.foodiehub.model.server.FoodOrder;
 import com.cs446.foodiehub.model.server.OrderItem;
+import com.orhanobut.logger.Logger;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -88,12 +92,35 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
         @Override
         public void onSuccess(int statusCode, String responseString) {
             // redirect to home page.
-            Toast.makeText(getActivity(), "Sucess", Toast.LENGTH_SHORT).show();
-        }
+            try {
+                JSONObject jsonObject = new JSONObject(responseString);
+                String message = null;
+                String total = null;
+                String foodStatus = null;
+                String orderId = null;
 
+                if (jsonObject.has("message")) message = jsonObject.get("message").toString();
+                if (jsonObject.has("total")) total = jsonObject.get("total").toString();
+                if (jsonObject.has("status")) foodStatus = jsonObject.get("status").toString();
+                if (jsonObject.has("orderid")) orderId = jsonObject.get("orderid").toString();
+
+                Toast.makeText(getActivity(), message+" "+ Util.getStringById(getActivity(), R.string.total_cost_with_tax)+" "+total, Toast.LENGTH_SHORT).show();
+
+                new FoodStatusThread(getActivity(), orderId, foodStatus).start();
+
+            } catch (Exception e) {
+                Logger.e("error", e);
+            }
+        }
         @Override
         public void onFailure(int statusCode, String responseString) {
-            Toast.makeText(getActivity(), "fail: "+responseString , Toast.LENGTH_SHORT).show();
+            try {
+                JSONObject jsonObject = new JSONObject(responseString);
+                if (jsonObject.has("message"))
+                    Toast.makeText(getActivity(), jsonObject.get("message").toString(), Toast.LENGTH_SHORT).show();
+            } catch (Exception e){
+
+            }
         }
     };
 

@@ -1,9 +1,8 @@
 package com.cs446.foodiehub.model;
 
+import com.cs446.foodiehub.model.server.Restaurant;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
 
 /**
  * Created by Alex on 15-07-12.
