@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.cs446.foodiehub.Api.LoginRequest;
+import com.cs446.foodiehub.Fragment.CheckoutFragment;
 import com.cs446.foodiehub.Interface.LoginResponse;
 import com.cs446.foodiehub.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -57,6 +58,8 @@ public class LoginActivity extends Activity{
     public void onResume(){
         super.onResume();
         resetLoading();
+
+        CheckoutFragment.killAllFoodStatusThread();
     }
 
     @Override

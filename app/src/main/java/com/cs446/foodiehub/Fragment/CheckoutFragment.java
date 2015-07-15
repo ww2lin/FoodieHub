@@ -26,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Alex on 15-06-09.
@@ -38,6 +39,12 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
     private String mResturantid;
     private ListView mListView;
     private TextView mTotalPrice;
+
+
+    // keep track of all worker threads
+    // These thread should be killed when going back to login screen
+
+    private static List<FoodStatusThread> workers = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,7 +113,9 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
 
                 Toast.makeText(getActivity(), message+" "+ Util.getStringById(getActivity(), R.string.total_cost_with_tax)+" "+total, Toast.LENGTH_SHORT).show();
 
-                new FoodStatusThread(getActivity(), orderId, foodStatus).start();
+                FoodStatusThread foodStatusThread = new FoodStatusThread(getActivity(), orderId, foodStatus);
+                foodStatusThread.start();
+                workers.add(foodStatusThread);
 
             } catch (Exception e) {
                 Logger.e("error", e);
@@ -127,5 +136,11 @@ public class CheckoutFragment extends MenuFoodieHubFragment {
     @Override
     protected String getTitle() {
         return FragmentType.RESTAURANT.getName();
+    }
+
+    public static void killAllFoodStatusThread(){
+        for (FoodStatusThread foodStatusThread : workers){
+            foodStatusThread.killThread();
+        }
     }
 }

@@ -23,6 +23,8 @@ public class FoodStatusThread extends Thread{
 
     private Activity activity;
 
+    private boolean isKilled = false;
+
     public FoodStatusThread(Activity activity, String orderId, String status){
         this.orderId = orderId;
         foodStatus = FoodStatus.valueOf(status.toUpperCase());
@@ -32,7 +34,7 @@ public class FoodStatusThread extends Thread{
     @Override
     public void run() {
         if (orderId != null) {
-            while (foodStatus == FoodStatus.PROGRESS) {
+            while (foodStatus == FoodStatus.PROGRESS && !isKilled) {
                 FoodOrderRequest.getFoodStatus(orderId, serverResponse);
                 try {
                     Thread.sleep(10000);
@@ -83,5 +85,9 @@ public class FoodStatusThread extends Thread{
                 Toast.makeText(activity, Util.getStringById(activity, stringid), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void killThread(){
+        isKilled = true;
     }
 }
