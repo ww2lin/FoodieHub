@@ -1,5 +1,7 @@
 # FoodieHub
 
+An android base app which interacts with the server, in order to order the food via smart phone.
+
 # TODO
 * Improve the UI.
 
